@@ -42,6 +42,7 @@ const App = {
     },
 
     navigate(screenId) {
+        SoundSystem.play('click');
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
 
         const screen = document.getElementById(screenId + '-screen');

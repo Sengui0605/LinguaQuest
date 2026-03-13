@@ -140,6 +140,7 @@ const QuizEngine = {
             if (isQuick) this.fastStreak++;
             else this.fastStreak = 0;
 
+            SoundSystem.play('correct');
             App.showXPPopup(`+${xpGained} XP`);
             if (newLevel) setTimeout(() => App.showLevelUp(newLevel), 800);
         } else {
@@ -153,6 +154,7 @@ const QuizEngine = {
             this.currentStreak = 0;
             this.fastStreak = 0;
             this.lives = Progress.loseLife();
+            SoundSystem.play('wrong');
             this.renderLives();
         }
 
@@ -201,7 +203,12 @@ const QuizEngine = {
                 this.checkLevelCompletion();
             }
 
-            if (isPerfect) Progress.data.perfectQuizzes++;
+            if (isPerfect) {
+                Progress.data.perfectQuizzes++;
+                SoundSystem.play('perfect');
+            } else {
+                SoundSystem.play('levelUp');
+            }
             Progress.updateStreak();
             Progress.resetLives();
         } else {
