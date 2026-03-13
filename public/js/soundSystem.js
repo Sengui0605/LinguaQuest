@@ -15,10 +15,13 @@ const SoundSystem = {
     play(soundName) {
         if (!Progress.data.settings.sound) return;
         
-        const sound = this.sounds[soundName];
-        if (sound) {
-            sound.currentTime = 0;
-            sound.play().catch(e => console.log('Audio play blocked or file missing:', soundName));
+        const original = this.sounds[soundName];
+        if (original) {
+            // Clone the audio node so sounds can overlap (important for rapid clicks)
+            const soundClone = original.cloneNode();
+            soundClone.play().catch(e => {
+                // Ignore errors if file is missing or play is blocked
+            });
         }
     }
 };
