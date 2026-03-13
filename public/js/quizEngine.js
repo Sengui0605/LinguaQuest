@@ -76,7 +76,6 @@ const QuizEngine = {
         document.getElementById('question-category').textContent =
             categoryMap[this.currentCourseId] || 'Gramática';
         document.getElementById('question-text').textContent = q.q;
-        document.getElementById('question-hint').textContent = q.hint || '';
 
         const optionsContainer = document.getElementById('quiz-options');
         optionsContainer.innerHTML = '';
