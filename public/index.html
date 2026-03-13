@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LinguaQuest - Aprende inglés de manera divertida con quizzes interactivos, niveles y logros. La mejor plataforma educativa para dominar el inglés.">
+    <title>LinguaQuest - Aprende Inglés Jugando</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css?v=1.1">
+</head>
+<body>
+    <div id="app">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="screen active">
+            <div class="loading-content">
+                <div class="loading-logo">
+                    <div class="logo-icon">🌍</div>
+                    <h1 class="logo-text">Lingua<span>Quest</span></h1>
+                </div>
+                <div class="loading-bar-container">
+                    <div class="loading-bar"></div>
+                </div>
+                <p class="loading-text">Preparando tu aventura...</p>
+            </div>
+        </div>
+
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen">
+            <div class="home-header">
+                <div class="home-logo">
+                    <div class="logo-icon-sm">🌍</div>
+                    <h2 class="logo-text-sm">Lingua<span>Quest</span></h2>
+                </div>
+                <div class="home-stats-bar">
+                    <div class="stat-badge xp-badge" title="Experiencia">
+                        <span class="stat-icon">⚡</span>
+                        <span id="home-xp">0</span>
+                    </div>
+                    <div class="stat-badge streak-badge" title="Racha diaria">
+                        <span class="stat-icon">🔥</span>
+                        <span id="home-streak">0</span>
+                    </div>
+                    <div class="stat-badge level-badge" title="Nivel">
+                        <span class="stat-icon">⭐</span>
+                        <span id="home-level">1</span>
+                    </div>
+                    <div class="stat-badge lives-badge" title="Vidas">
+                        <span class="stat-icon">❤️</span>
+                        <span id="home-lives">3</span>
+                    </div>
+                </div>
+            </div>
+            <div class="home-content">
+                <div class="welcome-section">
+                    <h1 class="welcome-title">¡Hola, <span id="player-name-display">Explorador</span>!</h1>
+                    <p class="welcome-subtitle">¿Listo para tu aventura con el inglés?</p>
+                </div>
+                <div class="home-menu">
+                    <button class="menu-btn play-btn" onclick="App.navigate('level-select')">
+                        <div class="menu-btn-icon">🎮</div>
+                        <div class="menu-btn-text">
+                            <span class="btn-title">Jugar</span>
+                            <span class="btn-desc">Continuar aprendiendo</span>
+                        </div>
+                        <div class="menu-btn-arrow">→</div>
+                    </button>
+                    <button class="menu-btn" onclick="App.navigate('level-select')">
+                        <div class="menu-btn-icon">📚</div>
+                        <div class="menu-btn-text">
+                            <span class="btn-title">Niveles</span>
+                            <span class="btn-desc">Explora los cursos</span>
+                        </div>
+                        <div class="menu-btn-arrow">→</div>
+                    </button>
+                    <button class="menu-btn" onclick="App.navigate('profile')">
+                        <div class="menu-btn-icon">👤</div>
+                        <div class="menu-btn-text">
+                            <span class="btn-title">Perfil</span>
+                            <span class="btn-desc">Tu progreso</span>
+                        </div>
+                        <div class="menu-btn-arrow">→</div>
+                    </button>
+                    <button class="menu-btn" onclick="App.navigate('achievements')">
+                        <div class="menu-btn-icon">🏆</div>
+                        <div class="menu-btn-text">
+                            <span class="btn-title">Logros</span>
+                            <span class="btn-desc">Desbloquea recompensas</span>
+                        </div>
+                        <div class="menu-btn-arrow">→</div>
+                    </button>
+                    <button class="menu-btn" onclick="App.navigate('ranking')">
+                        <div class="menu-btn-icon">🏅</div>
+                        <div class="menu-btn-text">
+                            <span class="btn-title">Ranking</span>
+                            <span class="btn-desc">Compite con otros</span>
+                        </div>
+                        <div class="menu-btn-arrow">→</div>
+                    </button>
+                    <button class="menu-btn" onclick="App.navigate('settings')">
+                        <div class="menu-btn-icon">⚙️</div>
+                        <div class="menu-btn-text">
+                            <span class="btn-title">Ajustes</span>
+                            <span class="btn-desc">Personaliza tu juego</span>
+                        </div>
+                        <div class="menu-btn-arrow">→</div>
+                    </button>
+                    <button class="menu-btn" onclick="App.navigate('instructions')">
+                        <div class="menu-btn-icon">📖</div>
+                        <div class="menu-btn-text">
+                            <span class="btn-title">Instrucciones</span>
+                            <span class="btn-desc">Cómo jugar</span>
+                        </div>
+                        <div class="menu-btn-arrow">→</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Screen -->
+        <div id="profile-screen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="App.navigate('home')">←</button>
+                <h2>Mi Perfil</h2>
+                <div class="header-spacer"></div>
+            </div>
+            <div class="screen-content">
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <div class="avatar-circle">
+                            <span id="profile-avatar-emoji">🧑‍🎓</span>
+                        </div>
+                        <div class="profile-level-badge">
+                            <span>Nv.</span>
+                            <span id="profile-level">1</span>
+                        </div>
+                    </div>
+                    <h2 id="profile-name">Explorador</h2>
+                    <p id="profile-title" class="profile-title-text">Principiante</p>
+                </div>
+                <div class="profile-xp-section">
+                    <div class="xp-header">
+                        <span>Nivel <span id="profile-current-level">1</span></span>
+                        <span id="profile-xp-text">0 / 100 XP</span>
+                    </div>
+                    <div class="xp-bar-container">
+                        <div class="xp-bar" id="profile-xp-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="profile-stats-grid">
+                    <div class="profile-stat-card">
+                        <div class="stat-value" id="profile-total-xp">0</div>
+                        <div class="stat-label">XP Total</div>
+                        <div class="stat-card-icon">⚡</div>
+                    </div>
+                    <div class="profile-stat-card">
+                        <div class="stat-value" id="profile-streak">0</div>
+                        <div class="stat-label">Racha</div>
+                        <div class="stat-card-icon">🔥</div>
+                    </div>
+                    <div class="profile-stat-card">
+                        <div class="stat-value" id="profile-courses-done">0</div>
+                        <div class="stat-label">Cursos</div>
+                        <div class="stat-card-icon">📚</div>
+                    </div>
+                    <div class="profile-stat-card">
+                        <div class="stat-value" id="profile-achievements-count">0</div>
+                        <div class="stat-label">Logros</div>
+                        <div class="stat-card-icon">🏆</div>
+                    </div>
+                    <div class="profile-stat-card">
+                        <div class="stat-value" id="profile-correct-answers">0</div>
+                        <div class="stat-label">Correctas</div>
+                        <div class="stat-card-icon">✅</div>
+                    </div>
+                    <div class="profile-stat-card">
+                        <div class="stat-value" id="profile-total-score">0</div>
+                        <div class="stat-label">Puntos</div>
+                        <div class="stat-card-icon">💎</div>
+                    </div>
+                </div>
+                <div class="profile-recent-achievements" id="profile-achievements-list">
+                    <h3>Logros Recientes</h3>
+                    <div class="mini-achievements-list" id="mini-achievements"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level Select Screen -->
+        <div id="level-select-screen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="App.navigate('home')">←</button>
+                <h2>Selecciona Nivel</h2>
+                <div class="header-spacer"></div>
+            </div>
+            <div class="screen-content">
+                <div class="levels-container" id="levels-container">
+                    <!-- Levels generated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Select Screen -->
+        <div id="course-select-screen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="App.navigate('level-select')">←</button>
+                <h2 id="course-select-title">Cursos</h2>
+                <div class="header-spacer"></div>
+            </div>
+            <div class="screen-content">
+                <div class="courses-container" id="courses-container">
+                    <!-- Courses generated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <button class="back-btn quiz-exit-btn" onclick="QuizEngine.confirmExit()">✕</button>
+                <div class="quiz-progress-bar-container">
+                    <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+                </div>
+                <div class="quiz-lives" id="quiz-lives">
+                    <span>❤️</span><span>❤️</span><span>❤️</span>
+                </div>
+            </div>
+            <div class="quiz-content">
+                <div class="quiz-info-bar">
+                    <div class="quiz-question-number" id="quiz-question-number">1 / 10</div>
+                    <div class="quiz-score" id="quiz-score">⭐ 0</div>
+                    <div class="quiz-xp" id="quiz-xp">⚡ 0 XP</div>
+                </div>
+                <div class="timer-container">
+                    <div class="timer-circle" id="timer-circle">
+                        <svg viewBox="0 0 100 100">
+                            <circle class="timer-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="timer-progress" id="timer-progress" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <span class="timer-text" id="timer-text">15</span>
+                    </div>
+                </div>
+                <div class="quiz-question-container">
+                    <div class="question-category" id="question-category">Gramática</div>
+                    <h2 class="question-text" id="question-text">Loading question...</h2>
+                    <p class="question-hint" id="question-hint"></p>
+                </div>
+                <div class="quiz-options" id="quiz-options">
+                    <!-- Options generated by JS -->
+                </div>
+                <div class="quiz-feedback" id="quiz-feedback">
+                    <div class="feedback-icon" id="feedback-icon">✅</div>
+                    <div class="feedback-text" id="feedback-text">¡Correcto!</div>
+                    <div class="feedback-explanation" id="feedback-explanation"></div>
+                    <button class="feedback-next-btn" id="feedback-next-btn" onclick="QuizEngine.nextQuestion()">Continuar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-content">
+                <div class="results-header-section">
+                    <div class="results-emoji" id="results-emoji">🎉</div>
+                    <h1 class="results-title" id="results-title">¡Excelente!</h1>
+                    <p class="results-subtitle" id="results-subtitle">Has completado el quiz</p>
+                </div>
+                <div class="results-score-circle">
+                    <div class="score-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="score-bg" cx="60" cy="60" r="54"></circle>
+                            <circle class="score-progress" id="results-score-circle" cx="60" cy="60" r="54"></circle>
+                        </svg>
+                        <div class="score-center">
+                            <span class="score-percent" id="results-percent">0%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="results-stats">
+                    <div class="result-stat">
+                        <span class="result-stat-icon">✅</span>
+                        <span class="result-stat-value" id="results-correct">0</span>
+                        <span class="result-stat-label">Correctas</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="result-stat-icon">❌</span>
+                        <span class="result-stat-value" id="results-incorrect">0</span>
+                        <span class="result-stat-label">Incorrectas</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="result-stat-icon">⭐</span>
+                        <span class="result-stat-value" id="results-score">0</span>
+                        <span class="result-stat-label">Puntos</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="result-stat-icon">⚡</span>
+                        <span class="result-stat-value" id="results-xp">0</span>
+                        <span class="result-stat-label">XP</span>
+                    </div>
+                </div>
+                <div class="results-achievements" id="results-achievements">
+                    <!-- Unlocked achievements shown here -->
+                </div>
+                <div class="results-unlock" id="results-unlock" style="display:none">
+                    <div class="unlock-icon">🔓</div>
+                    <p id="results-unlock-text">¡Nuevo curso desbloqueado!</p>
+                </div>
+                <div class="results-buttons">
+                    <button class="results-btn primary" onclick="App.navigate('level-select')">Seguir Aprendiendo</button>
+                    <button class="results-btn secondary" onclick="App.navigate('home')">Menú Principal</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Screen -->
+        <div id="achievements-screen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="App.navigate('home')">←</button>
+                <h2>Logros</h2>
+                <div class="header-spacer"></div>
+            </div>
+            <div class="screen-content">
+                <div class="achievements-summary">
+                    <span id="achievements-unlocked">0</span> / <span id="achievements-total">0</span> desbloqueados
+                </div>
+                <div class="achievements-list" id="achievements-list">
+                    <!-- Achievements generated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Ranking Screen -->
+        <div id="ranking-screen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="App.navigate('home')">←</button>
+                <h2>Ranking</h2>
+                <div class="header-spacer"></div>
+            </div>
+            <div class="screen-content">
+                <div class="ranking-tabs">
+                    <button class="ranking-tab active" onclick="Ranking.switchTab('xp', this)">XP</button>
+                    <button class="ranking-tab" onclick="Ranking.switchTab('score', this)">Puntos</button>
+                    <button class="ranking-tab" onclick="Ranking.switchTab('level', this)">Nivel</button>
+                </div>
+                <div class="ranking-list" id="ranking-list">
+                    <!-- Ranking generated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Screen -->
+        <div id="settings-screen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="App.navigate('home')">←</button>
+                <h2>Ajustes</h2>
+                <div class="header-spacer"></div>
+            </div>
+            <div class="screen-content">
+                <div class="settings-group">
+                    <h3>Perfil</h3>
+                    <div class="setting-item">
+                        <label for="setting-name">Nombre del jugador</label>
+                        <input type="text" id="setting-name" placeholder="Tu nombre" maxlength="20">
+                    </div>
+                    <div class="setting-item">
+                        <label>Avatar</label>
+                        <div class="avatar-selector" id="avatar-selector">
+                            <button class="avatar-option selected" data-avatar="🧑‍🎓">🧑‍🎓</button>
+                            <button class="avatar-option" data-avatar="🧑‍💻">🧑‍💻</button>
+                            <button class="avatar-option" data-avatar="🦊">🦊</button>
+                            <button class="avatar-option" data-avatar="🦉">🦉</button>
+                            <button class="avatar-option" data-avatar="🐱">🐱</button>
+                            <button class="avatar-option" data-avatar="🚀">🚀</button>
+                            <button class="avatar-option" data-avatar="🌟">🌟</button>
+                            <button class="avatar-option" data-avatar="🎯">🎯</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-group">
+                    <h3>Juego</h3>
+                    <div class="setting-item toggle-setting">
+                        <label for="setting-sound">Sonidos</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="setting-sound" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item toggle-setting">
+                        <label for="setting-animations">Animaciones</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="setting-animations" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item toggle-setting">
+                        <label for="setting-timer">Temporizador</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="setting-timer" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="settings-group">
+                    <h3>Datos</h3>
+                    <button class="settings-danger-btn" onclick="App.resetProgress()">🗑️ Resetear Progreso</button>
+                </div>
+                <button class="settings-save-btn" onclick="App.saveSettings()">Guardar Ajustes</button>
+            </div>
+        </div>
+
+        <!-- Instructions Screen -->
+        <div id="instructions-screen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="App.navigate('home')">←</button>
+                <h2>Instrucciones</h2>
+                <div class="header-spacer"></div>
+            </div>
+            <div class="screen-content">
+                <div class="instructions-list">
+                    <div class="instruction-card">
+                        <div class="instruction-icon">🎯</div>
+                        <h3>Objetivo</h3>
+                        <p>Aprende inglés respondiendo quizzes interactivos. Gana XP, sube de nivel y desbloquea nuevos cursos.</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-icon">📚</div>
+                        <h3>Niveles</h3>
+                        <p>Hay 3 niveles: Básico, Intermedio y Avanzado. Cada nivel tiene múltiples cursos con diferentes temas.</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-icon">⏱️</div>
+                        <h3>Temporizador</h3>
+                        <p>Tienes 15 segundos para cada pregunta. ¡Responde rápido para obtener puntos bonus!</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-icon">❤️</div>
+                        <h3>Vidas</h3>
+                        <p>Tienes 3 vidas por quiz. Si respondes mal, pierdes una vida. Si se acaban, el quiz termina.</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-icon">⚡</div>
+                        <h3>XP y Puntos</h3>
+                        <p>Gana 10 XP y 10 puntos por respuesta correcta. Bonus de 5 si respondes en menos de 5 segundos. 100 XP al completar un curso.</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-icon">🔥</div>
+                        <h3>Racha Diaria</h3>
+                        <p>Juega cada día para mantener tu racha activa. ¡Mientras más días seguidos, más recompensas!</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-icon">🏆</div>
+                        <h3>Logros</h3>
+                        <p>Completa desafíos especiales para desbloquear logros y demostrar tu dominio del inglés.</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-icon">🏅</div>
+                        <h3>Ranking</h3>
+                        <p>Compite con otros jugadores y escala posiciones en el ranking global.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirm Modal -->
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal-content">
+                <h3 id="modal-title">¿Estás seguro?</h3>
+                <p id="modal-text">Perderás el progreso de este quiz.</p>
+                <div class="modal-buttons">
+                    <button class="modal-btn cancel" id="modal-cancel" onclick="App.closeModal()">Cancelar</button>
+                    <button class="modal-btn confirm" id="modal-confirm">Confirmar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast">
+            <span class="toast-icon" id="toast-icon">✅</span>
+            <span class="toast-text" id="toast-text">Mensaje</span>
+        </div>
+
+        <!-- XP Popup -->
+        <div class="xp-popup" id="xp-popup">
+            <span id="xp-popup-text">+10 XP</span>
+        </div>
+
+        <!-- Level Up Modal -->
+        <div class="levelup-overlay" id="levelup-overlay">
+            <div class="levelup-content">
+                <div class="levelup-particles" id="levelup-particles"></div>
+                <div class="levelup-icon">🎉</div>
+                <h2>¡Subiste de Nivel!</h2>
+                <div class="levelup-level" id="levelup-level">Nivel 2</div>
+                <p class="levelup-text" id="levelup-text">Sigue así, ¡lo estás haciendo genial!</p>
+                <button class="levelup-btn" onclick="App.closeLevelUp()">¡Genial!</button>
+            </div>
+        </div>
+
+        <!-- Name Entry Modal (First time) -->
+        <div class="modal-overlay" id="name-modal" style="display:none">
+            <div class="modal-content name-modal-content">
+                <div class="name-modal-icon">🌍</div>
+                <h2>¡Bienvenido a LinguaQuest!</h2>
+                <p>¿Cómo te llamas, explorador?</p>
+                <input type="text" id="name-input" placeholder="Escribe tu nombre" maxlength="20" class="name-input">
+                <button class="modal-btn confirm name-confirm-btn" onclick="App.setPlayerName()">¡Comenzar Aventura!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/questions.js?v=1.1"></script>
+    <script src="js/questions_intermediate_extra.js?v=1.1"></script>
+    <script src="js/questions_advanced_extra.js?v=1.1"></script>
+    <script src="js/timer.js?v=1.1"></script>
+    <script src="js/scoreSystem.js?v=1.1"></script>
+    <script src="js/xpSystem.js?v=1.1"></script>
+    <script src="js/achievements.js?v=1.1"></script>
+    <script src="js/ranking.js?v=1.1"></script>
+    <script src="js/progress.js?v=1.1"></script>
+    <script src="js/quizEngine.js?v=1.1"></script>
+    <script src="js/app.js?v=1.1"></script>
+
+    <!-- Firebase SDK (ES Module) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getFirestore, collection, doc, setDoc, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyBShgh_avRyFgO5eqRi4-k3Lwp2HnRYKX8",
+            authDomain: "linguaquest-senjiro.firebaseapp.com",
+            projectId: "linguaquest-senjiro",
+            storageBucket: "linguaquest-senjiro.firebasestorage.app",
+            messagingSenderId: "715010132386",
+            appId: "1:715010132386:web:47b8d9e89932fc66dd4afb"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        // Expose to global scope for Ranking System
+        window.FirebaseDB = {
+            db,
+            collection,
+            doc,
+            setDoc,
+            getDocs,
+            query,
+            orderBy,
+            limit
+        };
+        console.log("🔥 Firebase & Firestore Initialized Successfully!");
+    </script>
+</body>
+</html>

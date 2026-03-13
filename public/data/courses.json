@@ -1,0 +1,82 @@
+[
+  {
+    "id": "basic",
+    "name": "Básico",
+    "description": "Fundamentos del inglés",
+    "icon": "🌱",
+    "color": "#58CC02",
+    "requiredXP": 0,
+    "courses": [
+      {"id": "to-be", "name": "Verbo To Be", "icon": "📝", "questions": 30, "description": "Aprende el verbo más importante"},
+      {"id": "pronouns", "name": "Pronombres", "icon": "👥", "questions": 30, "description": "Pronombres personales y posesivos"},
+      {"id": "present-simple", "name": "Presente Simple", "icon": "⏰", "questions": 30, "description": "Acciones habituales"},
+      {"id": "articles", "name": "Artículos", "icon": "📰", "questions": 30, "description": "A, An, The"},
+      {"id": "prepositions", "name": "Preposiciones", "icon": "📍", "questions": 30, "description": "In, On, At y más"},
+      {"id": "greetings", "name": "Saludos y Vocabulario", "icon": "👋", "questions": 30, "description": "Saludos y palabras comunes"},
+      {"id": "numbers-days", "name": "Números y Días", "icon": "🔢", "questions": 30, "description": "Números, días y meses"},
+      {"id": "wh-questions", "name": "Wh Questions", "icon": "❓", "questions": 30, "description": "Preguntas con Wh"},
+      {"id": "adjectives-basic", "name": "Adjetivos Básicos", "icon": "🎨", "questions": 30, "description": "Describe el mundo"},
+      {"id": "demonstratives", "name": "Demostrativos", "icon": "👆", "questions": 30, "description": "This, That, These, Those"},
+      {"id": "colors-shapes", "name": "Colores y Formas", "icon": "🎨", "questions": 30, "description": "Colors and shapes"},
+      {"id": "food-drinks", "name": "Comida y Bebidas", "icon": "🍕", "questions": 30, "description": "Food and drinks vocabulary"},
+      {"id": "animals", "name": "Animales", "icon": "🐾", "questions": 30, "description": "Animal vocabulary"},
+      {"id": "body-parts", "name": "Partes del Cuerpo", "icon": "🦴", "questions": 30, "description": "Body parts"},
+      {"id": "weather-nature", "name": "Clima y Naturaleza", "icon": "🌤️", "questions": 30, "description": "Weather and nature"},
+      {"id": "telling-time", "name": "La Hora", "icon": "🕐", "questions": 30, "description": "Telling time in English"},
+      {"id": "countries", "name": "Países y Nacionalidades", "icon": "🌎", "questions": 30, "description": "Countries and nationalities"},
+      {"id": "jobs", "name": "Profesiones", "icon": "👨‍⚕️", "questions": 30, "description": "Jobs and professions"},
+      {"id": "daily-routines", "name": "Rutinas Diarias", "icon": "🌅", "questions": 30, "description": "Daily routine vocabulary"},
+      {"id": "quantifiers", "name": "Cuantificadores", "icon": "📊", "questions": 30, "description": "Some, any, much, many"}
+    ]
+  },
+  {
+    "id": "intermediate",
+    "name": "Intermedio",
+    "description": "Expande tu conocimiento",
+    "icon": "🌿",
+    "color": "#1CB0F6",
+    "requiredXP": 500,
+    "courses": [
+      {"id": "present-continuous", "name": "Present Continuous", "icon": "🔄", "questions": 30, "description": "Acciones en progreso"},
+      {"id": "past-simple", "name": "Past Simple", "icon": "⏪", "questions": 30, "description": "Habla del pasado"},
+      {"id": "comparatives", "name": "Comparativos", "icon": "⚖️", "questions": 30, "description": "Compara cosas"},
+      {"id": "superlatives", "name": "Superlativos", "icon": "🏆", "questions": 30, "description": "Lo mejor y lo peor"},
+      {"id": "modals", "name": "Modal Verbs", "icon": "🔑", "questions": 30, "description": "Can, Could, Should..."},
+      {"id": "phrasal-verbs", "name": "Phrasal Verbs", "icon": "🧩", "questions": 30, "description": "Verbos compuestos"},
+      {"id": "connectors", "name": "Conectores", "icon": "🔗", "questions": 30, "description": "And, But, Because..."},
+      {"id": "question-forms", "name": "Question Forms", "icon": "❔", "questions": 30, "description": "Tipos de preguntas"},
+      {"id": "future-will", "name": "Future (Will)", "icon": "🔮", "questions": 30, "description": "Futuro con will"},
+      {"id": "going-to", "name": "Going To", "icon": "🎯", "questions": 30, "description": "Planes futuros"},
+      {"id": "past-continuous", "name": "Past Continuous", "icon": "⏳", "questions": 30, "description": "Acciones pasadas en progreso"},
+      {"id": "countable-uncountable", "name": "Contables/Incontables", "icon": "🔢", "questions": 30, "description": "Countable and uncountable nouns"},
+      {"id": "relative-clauses", "name": "Relative Clauses", "icon": "🔗", "questions": 30, "description": "Who, which, that, where"},
+      {"id": "gerunds-infinitives", "name": "Gerundios e Infinitivos", "icon": "📐", "questions": 30, "description": "Verb + ing vs to + verb"},
+      {"id": "adverbs", "name": "Adverbios", "icon": "⚡", "questions": 30, "description": "How, when, where"},
+      {"id": "used-to", "name": "Used To", "icon": "🕰️", "questions": 30, "description": "Hábitos pasados"}
+    ]
+  },
+  {
+    "id": "advanced",
+    "name": "Avanzado",
+    "description": "Domina el inglés",
+    "icon": "🌳",
+    "color": "#CE82FF",
+    "requiredXP": 2000,
+    "courses": [
+      {"id": "present-perfect", "name": "Present Perfect", "icon": "✨", "questions": 30, "description": "Experiencias y resultados"},
+      {"id": "past-perfect", "name": "Past Perfect", "icon": "🕰️", "questions": 30, "description": "Antes del pasado"},
+      {"id": "conditionals", "name": "Conditionals", "icon": "🔮", "questions": 30, "description": "If clauses"},
+      {"id": "passive-voice", "name": "Passive Voice", "icon": "🔄", "questions": 30, "description": "Voz pasiva"},
+      {"id": "reported-speech", "name": "Reported Speech", "icon": "💬", "questions": 30, "description": "Estilo indirecto"},
+      {"id": "idioms", "name": "Idioms", "icon": "🗣️", "questions": 30, "description": "Expresiones idiomáticas"},
+      {"id": "future-perfect", "name": "Future Perfect", "icon": "🚀", "questions": 30, "description": "Acciones futuras completadas"},
+      {"id": "wish-if-only", "name": "Wish / If Only", "icon": "🌟", "questions": 30, "description": "Deseos y arrepentimientos"},
+      {"id": "collocations", "name": "Collocations", "icon": "🧲", "questions": 30, "description": "Combinaciones comunes"},
+      {"id": "word-formation", "name": "Word Formation", "icon": "🧱", "questions": 30, "description": "Prefijos y sufijos"},
+      {"id": "advanced-phrasal", "name": "Phrasal Verbs Avanzados", "icon": "🧩", "questions": 30, "description": "Phrasal verbs complejos"},
+      {"id": "advanced-vocab", "name": "Vocabulario Avanzado", "icon": "📚", "questions": 30, "description": "Academic and formal vocabulary"},
+      {"id": "linking-words", "name": "Linking Words", "icon": "🔗", "questions": 30, "description": "Conectores avanzados"},
+      {"id": "inversion", "name": "Inversión Gramatical", "icon": "🔀", "questions": 30, "description": "Inversion structures"}
+    ]
+  }
+]

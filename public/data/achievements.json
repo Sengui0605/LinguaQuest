@@ -1,0 +1,22 @@
+[
+  {"id": "first-quiz", "name": "Primer Paso", "description": "Completa tu primer quiz", "icon": "🎯", "condition": "quizCompleted", "value": 1},
+  {"id": "correct-10", "name": "En Racha", "description": "10 respuestas correctas seguidas", "icon": "🔥", "condition": "streak", "value": 10},
+  {"id": "questions-50", "name": "Curioso", "description": "Responde 50 preguntas", "icon": "❓", "condition": "totalQuestions", "value": 50},
+  {"id": "questions-100", "name": "Estudioso", "description": "Responde 100 preguntas", "icon": "📖", "condition": "totalQuestions", "value": 100},
+  {"id": "questions-500", "name": "Erudito", "description": "Responde 500 preguntas", "icon": "🧠", "condition": "totalQuestions", "value": 500},
+  {"id": "basic-complete", "name": "Fundamentos", "description": "Completa el nivel Básico", "icon": "🌱", "condition": "levelComplete", "value": "basic"},
+  {"id": "intermediate-complete", "name": "En Crecimiento", "description": "Completa el nivel Intermedio", "icon": "🌿", "condition": "levelComplete", "value": "intermediate"},
+  {"id": "advanced-complete", "name": "Maestro", "description": "Completa el nivel Avanzado", "icon": "🌳", "condition": "levelComplete", "value": "advanced"},
+  {"id": "xp-100", "name": "Iniciado", "description": "Obtén 100 XP", "icon": "⚡", "condition": "totalXP", "value": 100},
+  {"id": "xp-500", "name": "Aprendiz", "description": "Obtén 500 XP", "icon": "💪", "condition": "totalXP", "value": 500},
+  {"id": "xp-1000", "name": "Veterano", "description": "Obtén 1000 XP", "icon": "🏅", "condition": "totalXP", "value": 1000},
+  {"id": "xp-5000", "name": "Leyenda", "description": "Obtén 5000 XP", "icon": "👑", "condition": "totalXP", "value": 5000},
+  {"id": "streak-3", "name": "Constante", "description": "Racha de 3 días", "icon": "📅", "condition": "dailyStreak", "value": 3},
+  {"id": "streak-7", "name": "Dedicado", "description": "Racha de 7 días", "icon": "🗓️", "condition": "dailyStreak", "value": 7},
+  {"id": "streak-30", "name": "Imparable", "description": "Racha de 30 días", "icon": "🔥", "condition": "dailyStreak", "value": 30},
+  {"id": "perfect-quiz", "name": "Perfecto", "description": "Quiz sin errores", "icon": "💯", "condition": "perfectQuiz", "value": 1},
+  {"id": "speed-demon", "name": "Veloz", "description": "5 respuestas rápidas seguidas", "icon": "⚡", "condition": "fastAnswers", "value": 5},
+  {"id": "courses-5", "name": "Explorador", "description": "Completa 5 cursos", "icon": "🗺️", "condition": "coursesCompleted", "value": 5},
+  {"id": "courses-10", "name": "Aventurero", "description": "Completa 10 cursos", "icon": "🧭", "condition": "coursesCompleted", "value": 10},
+  {"id": "courses-20", "name": "Conquistador", "description": "Completa 20 cursos", "icon": "🏰", "condition": "coursesCompleted", "value": 20}
+]
