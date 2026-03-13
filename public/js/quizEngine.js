@@ -103,6 +103,9 @@ const QuizEngine = {
                 () => this.answer(-1)
             );
         }
+
+        // Ensure options are visible
+        optionsContainer.style.display = 'flex';
     },
 
     answer(index) {
@@ -120,6 +123,11 @@ const QuizEngine = {
             if (i === q.a) btn.classList.add('correct');
             if (i === index && !correct) btn.classList.add('incorrect');
         });
+
+        // Hide options to make room for feedback
+        setTimeout(() => {
+            document.getElementById('quiz-options').style.display = 'none';
+        }, 150);
 
         const feedback = document.getElementById('quiz-feedback');
         const feedbackIcon = document.getElementById('feedback-icon');
