@@ -18,9 +18,6 @@ const App = {
         Achievements.loadUnlocked(Progress.data.unlockedAchievements);
         loadingBar.style.width = '60%';
 
-        await Ranking.load();
-        loadingBar.style.width = '80%';
-
         try {
             const res = await fetch('data/courses.json');
             this.coursesData = await res.json();
@@ -32,7 +29,9 @@ const App = {
         loadingBar.style.width = '100%';
 
         setTimeout(() => {
-            if (!Progress.data.playerName) {
+            if (!Progress.data.isActivated) {
+                this.navigate('role-selection');
+            } else if (!Progress.data.playerName && Progress.data.userRole === 'student') {
                 this.navigate('home');
                 this.showNameModal();
             } else {
@@ -56,7 +55,7 @@ const App = {
             case 'profile': this.updateProfileScreen(); break;
             case 'level-select': this.renderLevels(); break;
             case 'achievements': Achievements.render('achievements-list'); break;
-            case 'ranking': this.updateRanking(); Ranking.render('ranking-list'); break;
+            case 'achievements': Achievements.render('achievements-list'); break;
             case 'settings': this.loadSettings(); break;
         }
     },
@@ -65,7 +64,6 @@ const App = {
         document.getElementById('home-xp').textContent = Progress.data.totalXP;
         document.getElementById('home-streak').textContent = Progress.data.dailyStreak;
         document.getElementById('home-level').textContent = XPSystem.getLevel();
-        document.getElementById('home-lives').textContent = Progress.checkLives();
         document.getElementById('player-name-display').textContent =
             Progress.data.playerName || 'Explorador';
     },
@@ -172,11 +170,6 @@ const App = {
 
             if (isUnlocked) {
                 card.onclick = () => {
-                    const lives = Progress.checkLives();
-                    if (lives <= 0) {
-                        this.showToast('💔', 'No tienes vidas. Espera 1 minuto.');
-                        return;
-                    }
                     QuizEngine.start(level.id, course.id);
                 };
             }
@@ -184,14 +177,121 @@ const App = {
         });
     },
 
-    updateRanking() {
-        Ranking.savePlayerProgress({
-            name: Progress.data.playerName || 'Tú',
-            avatar: Progress.data.avatar,
-            level: XPSystem.getLevel ? XPSystem.getLevel() : Progress.data.level,
-            xp: Progress.data.totalXP,
-            score: Progress.data.totalScore
-        });
+
+    selectRole(role) {
+        if (role === 'teacher') this.navigate('teacher-auth');
+        else this.navigate('student-auth');
+    },
+
+    async verifyTeacherLicense() {
+        const input = document.getElementById('teacher-key-input');
+        const key = input.value.trim().toUpperCase();
+        if (!key) return;
+
+        try {
+            const { db, doc, getDoc } = window.FirebaseDB;
+            const docSnap = await getDoc(doc(db, "teacher_licenses", key));
+
+            if (docSnap.exists() && docSnap.data().status === 'active') {
+                Progress.data.isActivated = true;
+                Progress.data.userRole = 'teacher';
+                Progress.data.licenseKey = key;
+                Progress.data.playerName = docSnap.data().teacher_name || 'Profesor';
+                Progress.save();
+                this.showToast('✅', 'Acceso Docente Activo');
+                setTimeout(() => this.navigate('home'), 1000);
+            } else {
+                this.showToast('❌', 'Llave Inválida');
+            }
+        } catch (e) {
+            this.showToast('📡', 'Error de conexión');
+        }
+    },
+
+    async verifyStudentCode() {
+        const input = document.getElementById('student-code-input');
+        const code = input.value.trim().toUpperCase();
+        if (!code) return;
+
+        try {
+            const { db, doc, getDoc, updateDoc, arrayUnion } = window.FirebaseDB;
+            const docSnap = await getDoc(doc(db, "active_codes", code));
+
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                // Verificar licencia del creador
+                const licenseSnap = await getDoc(doc(db, "teacher_licenses", data.teacher_key));
+                
+                if (!licenseSnap.exists()) {
+                    this.showToast('❌', 'Error: Licencia del docente no encontrada');
+                    return;
+                }
+
+                const licenseData = licenseSnap.data();
+
+                if (licenseData.active_devices && licenseData.active_devices.length >= licenseData.max_devices) {
+                    this.showToast('🚫', 'Límite de la clase excedido');
+                    return;
+                }
+
+                let deviceId = localStorage.getItem('lq_device_id');
+                if (!deviceId) {
+                    deviceId = 'DEV-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+                    localStorage.setItem('lq_device_id', deviceId);
+                }
+
+                await updateDoc(doc(db, "teacher_licenses", data.teacher_key), {
+                    active_devices: arrayUnion(deviceId)
+                });
+
+                Progress.data.isActivated = true;
+                Progress.data.userRole = 'student';
+                Progress.data.classCode = code;
+                Progress.save();
+                this.showToast('✅', '¡Bienvenido a Clase!');
+                setTimeout(() => this.navigate('home'), 1000);
+            } else {
+                this.showToast('❌', 'Código Inválido');
+            }
+        } catch (e) {
+            this.showToast('📡', 'Error de conexión');
+        }
+    },
+
+    async generateNewStudentCode() {
+        const code = Math.random().toString(36).substr(2, 6).toUpperCase();
+        try {
+            const { db, doc, setDoc } = window.FirebaseDB;
+            await setDoc(doc(db, "active_codes", code), {
+                teacher_key: Progress.data.licenseKey,
+                created_at: new Date()
+            });
+            document.getElementById('generated-code-display').textContent = code;
+            this.showToast('✨', 'Nuevo código generado');
+        } catch (e) {
+            this.showToast('❌', 'Error al generar');
+        }
+    },
+
+    showTeacherDashboard() {
+        document.getElementById('teacher-modal').style.display = 'flex';
+        this.updateTeacherStats();
+    },
+
+    async updateTeacherStats() {
+        try {
+            const { db, doc, getDoc } = window.FirebaseDB;
+            const snap = await getDoc(doc(db, "teacher_licenses", Progress.data.licenseKey));
+            if (snap.exists()) {
+                const data = snap.data();
+                const count = data.active_devices ? data.active_devices.length : 0;
+                document.getElementById('teacher-devices-count').textContent = `${count}/${data.max_devices}`;
+            }
+        } catch (e) {}
+    },
+
+    closeTeacherDashboard() {
+        document.getElementById('teacher-modal').style.display = 'none';
     },
 
     // ---- Settings ----
@@ -200,6 +300,14 @@ const App = {
         document.getElementById('setting-sound').checked = Progress.data.settings.sound;
         document.getElementById('setting-animations').checked = Progress.data.settings.animations;
         document.getElementById('setting-timer').checked = Progress.data.settings.timer;
+
+        const statusEl = document.getElementById('setting-license-status');
+        const keyEl = document.getElementById('setting-license-key');
+        if (statusEl) statusEl.textContent = Progress.data.isActivated ? `Activado (${Progress.data.userRole})` : 'No activado ❌';
+        if (keyEl) keyEl.textContent = Progress.data.userRole === 'teacher' ? Progress.data.licenseKey : Progress.data.classCode || 'N/A';
+
+        const teacherLink = document.getElementById('teacher-panel-link');
+        if (teacherLink) teacherLink.style.display = Progress.data.userRole === 'teacher' ? 'block' : 'none';
 
         document.querySelectorAll('.avatar-option').forEach(btn => {
             btn.classList.toggle('selected', btn.dataset.avatar === Progress.data.avatar);
@@ -304,6 +412,46 @@ const App = {
 
     closeLevelUp() {
         document.getElementById('levelup-overlay').classList.remove('show');
+    },
+
+    showQuizResults(correct, total, accuracy) {
+        const xpGained = XPSystem.sessionXP;
+        const passed = accuracy >= 60;
+
+        document.getElementById('results-score').textContent = ScoreSystem.currentScore;
+        document.getElementById('results-accuracy').textContent = `${accuracy}%`;
+        document.getElementById('results-xp').textContent = xpGained;
+
+        const iconEl = document.getElementById('results-main-icon');
+        const titleEl = document.getElementById('results-title');
+        const subtitleEl = document.getElementById('results-subtitle');
+
+        if (passed) {
+            iconEl.textContent = '🏆';
+            titleEl.textContent = '¡Quiz Completado!';
+            subtitleEl.textContent = 'Has demostrado un gran dominio. ¡Sigue así!';
+            
+            // Only unlock next if passed
+            Progress.completeCourse(QuizEngine.currentCourseId);
+        } else {
+            iconEl.textContent = '📚';
+            titleEl.textContent = 'Sigue practicando';
+            subtitleEl.textContent = 'Necesitas al menos 60% para desbloquear el siguiente nivel.';
+        }
+
+        this.navigate('results');
+        
+        // Save at the end of the quiz
+        Progress.data.quizzesCompleted++;
+        Progress.save();
+    },
+
+    rematchQuiz() {
+        if (QuizEngine.currentCourseId && QuizEngine.currentLevelId) {
+            QuizEngine.start(QuizEngine.currentLevelId, QuizEngine.currentCourseId);
+        } else {
+            this.navigate('level-select');
+        }
     }
 };
 

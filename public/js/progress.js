@@ -19,8 +19,6 @@ const Progress = {
             level: 1,
             dailyStreak: 0,
             lastPlayDate: null,
-            lives: 3,
-            livesResetTime: null,
             quizzesCompleted: 0,
             totalQuestions: 0,
             correctAnswers: 0,
@@ -32,6 +30,10 @@ const Progress = {
             completedLevels: [],
             courseProgress: {},
             unlockedAchievements: [],
+            isActivated: false,
+            userRole: null, // 'teacher' or 'student'
+            licenseKey: '',
+            classCode: '',
             settings: { sound: true, animations: true, timer: true }
         };
     },
@@ -72,17 +74,6 @@ const Progress = {
             } else {
                 // Browser: localStorage
                 localStorage.setItem(this.storageKey, JSON.stringify(this.data));
-            }
-            // Trigger Firebase sync
-            if (typeof Ranking !== 'undefined' && Ranking.savePlayerProgress) {
-                Ranking.savePlayerProgress({
-                    name: this.data.playerName || 'Jugador',
-                    avatar: this.data.avatar || '🧑‍🎓',
-                    // Fallback level calculation if XPSystem isn't totally loaded
-                    level: (typeof XPSystem !== 'undefined' && XPSystem.getLevel) ? XPSystem.getLevel() : this.data.level,
-                    xp: this.data.totalXP,
-                    score: this.data.totalScore || 0
-                });
             }
         } catch (e) {
             console.error('Error saving progress:', e);
@@ -128,37 +119,6 @@ const Progress = {
         }
     },
 
-    checkLives() {
-        if (this.data.lives <= 0 && this.data.livesResetTime) {
-            const resetTime = new Date(this.data.livesResetTime);
-            const now = new Date();
-            const maxValidTime = new Date(now.getTime() + 2 * 60000); 
-            
-            if (now >= resetTime || resetTime > maxValidTime) {
-                this.data.lives = 3;
-                this.data.livesResetTime = null;
-                this.save();
-            }
-        }
-        return this.data.lives;
-    },
-
-    loseLife() {
-        this.data.lives--;
-        if (this.data.lives <= 0) {
-            const reset = new Date();
-            reset.setMinutes(reset.getMinutes() + 1);
-            this.data.livesResetTime = reset.toISOString();
-        }
-        this.save();
-        return this.data.lives;
-    },
-
-    resetLives() {
-        this.data.lives = 3;
-        this.data.livesResetTime = null;
-        this.save();
-    },
 
     completeCourse(courseId) {
         if (!this.data.completedCourses.includes(courseId)) {

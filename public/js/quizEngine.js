@@ -6,7 +6,6 @@
 const QuizEngine = {
     questions: [],
     currentIndex: 0,
-    lives: 3,
     correctCount: 0,
     incorrectCount: 0,
     currentStreak: 0,
@@ -27,7 +26,7 @@ const QuizEngine = {
 
         this.questions = this.shuffle([...allQuestions]).slice(0, 15);
         this.currentIndex = 0;
-        this.lives = Progress.checkLives();
+        this.lives = 5; 
         this.correctCount = 0;
         this.incorrectCount = 0;
         this.currentStreak = 0;
@@ -40,6 +39,17 @@ const QuizEngine = {
 
         App.navigate('quiz');
         this.renderQuestion();
+    },
+
+    confirmExit() {
+        App.showModal(
+            ' Abandonar aventura?',
+            'Si sales ahora, perderás tu progreso en este quiz.',
+            () => {
+                Timer.stop();
+                App.navigate('home');
+            }
+        );
     },
 
     renderQuestion() {
@@ -57,7 +67,6 @@ const QuizEngine = {
         document.getElementById('quiz-question-number').textContent =
             `${this.currentIndex + 1} / ${total}`;
 
-        this.renderLives();
 
         const categoryMap = {
             'to-be': 'Verbo To Be', 'pronouns': 'Pronombres', 'present-simple': 'Presente Simple',
@@ -104,7 +113,7 @@ const QuizEngine = {
         }
 
         // Ensure options are visible
-        optionsContainer.style.display = 'flex';
+        document.getElementById('quiz-question-container-inner').style.display = 'block';
     },
 
     answer(index) {
@@ -123,9 +132,9 @@ const QuizEngine = {
             if (i === index && !correct) btn.classList.add('incorrect');
         });
 
-        // Hide options to make room for feedback
+        // Hide content to make room for feedback
         setTimeout(() => {
-            document.getElementById('quiz-options').style.display = 'none';
+            document.getElementById('quiz-question-container-inner').style.display = 'none';
         }, 150);
 
         const feedback = document.getElementById('quiz-feedback');
@@ -160,9 +169,7 @@ const QuizEngine = {
             this.incorrectCount++;
             this.currentStreak = 0;
             this.fastStreak = 0;
-            this.lives = Progress.loseLife();
             SoundSystem.play('wrong');
-            this.renderLives();
         }
 
         Progress.data.totalQuestions++;
@@ -179,136 +186,17 @@ const QuizEngine = {
         this.renderQuestion();
     },
 
-    renderLives() {
-        const container = document.getElementById('quiz-lives');
-        if (!container) return;
-        let html = '';
-        for (let i = 0; i < 3; i++) {
-            html += i < this.lives
-                ? '<span>❤️</span>'
-                : '<span class="life-lost">🖤</span>';
+    shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
-        container.innerHTML = html;
+        return array;
     },
 
     finish() {
-        const total = this.questions.length;
-        const percent = total > 0 ? Math.round((this.correctCount / total) * 100) : 0;
-        const isPerfect = this.incorrectCount === 0 && this.correctCount > 0;
-        const completionXP = 100;
-
-        if (percent >= 70) {
-            ScoreSystem.addCompletion();
-            XPSystem.addXP(completionXP);
-            Progress.data.totalXP = XPSystem.currentXP;
-            Progress.data.totalScore += ScoreSystem.getScore();
-            Progress.data.level = XPSystem.getLevel();
-            Progress.data.quizzesCompleted++;
-
-            if (percent >= 80) {
-                Progress.completeCourse(this.currentCourseId);
-                this.checkLevelCompletion();
-            }
-
-            if (isPerfect) {
-                Progress.data.perfectQuizzes++;
-                SoundSystem.play('perfect');
-            } else {
-                SoundSystem.play('levelUp');
-            }
-            Progress.updateStreak();
-            Progress.resetLives();
-        } else {
-            Progress.data.totalXP = XPSystem.currentXP;
-            Progress.data.totalScore += ScoreSystem.getScore();
-            Progress.data.level = XPSystem.getLevel();
-        }
-
-        Progress.save();
-
-        const playerData = Progress.getPlayerData();
-        this.newAchievements = Achievements.check(playerData);
-        Progress.data.unlockedAchievements = Achievements.unlocked;
-        Progress.save();
-
-        this.showResults(percent, isPerfect);
-    },
-
-    checkLevelCompletion() {
-        const coursesData = App.coursesData;
-        if (!coursesData) return;
-        for (const level of coursesData) {
-            const allDone = level.courses.every(c =>
-                Progress.isCourseCompleted(c.id)
-            );
-            if (allDone) Progress.completeLevel(level.id);
-        }
-    },
-
-    showResults(percent, isPerfect) {
-        App.navigate('results');
-
-        let emoji, title, subtitle;
-        if (percent >= 90) { emoji = '🏆'; title = '¡Increíble!'; subtitle = '¡Eres un genio del inglés!'; }
-        else if (percent >= 70) { emoji = '🎉'; title = '¡Excelente!'; subtitle = '¡Gran trabajo!'; }
-        else if (percent >= 50) { emoji = '👍'; title = '¡Bien hecho!'; subtitle = 'Sigue practicando'; }
-        else { emoji = '💪'; title = '¡No te rindas!'; subtitle = 'La práctica hace al maestro'; }
-        if (isPerfect) { emoji = '💯'; title = '¡PERFECTO!'; subtitle = '¡Sin errores!'; }
-
-        document.getElementById('results-emoji').textContent = emoji;
-        document.getElementById('results-title').textContent = title;
-        document.getElementById('results-subtitle').textContent = subtitle;
-        document.getElementById('results-correct').textContent = this.correctCount;
-        document.getElementById('results-incorrect').textContent = this.incorrectCount;
-        document.getElementById('results-score').textContent = ScoreSystem.getScore();
-        document.getElementById('results-xp').textContent = XPSystem.sessionXP;
-        document.getElementById('results-percent').textContent = percent + '%';
-
-        const circumference = 2 * Math.PI * 54;
-        const scoreCircle = document.getElementById('results-score-circle');
-        scoreCircle.style.strokeDasharray = circumference;
-        scoreCircle.style.strokeDashoffset = circumference;
-        setTimeout(() => {
-            scoreCircle.style.strokeDashoffset = circumference * (1 - percent / 100);
-        }, 300);
-
-        const achContainer = document.getElementById('results-achievements');
-        achContainer.innerHTML = '';
-        this.newAchievements.forEach(ach => {
-            const el = document.createElement('div');
-            el.className = 'results-achievement-item';
-            el.innerHTML = `
-                <div class="results-achievement-icon">${ach.icon}</div>
-                <div class="results-achievement-info">
-                    <h4>🔓 ${ach.name}</h4>
-                    <p>${ach.description}</p>
-                </div>
-            `;
-            achContainer.appendChild(el);
-        });
-
-        const unlockEl = document.getElementById('results-unlock');
-        if (percent >= 80) {
-            unlockEl.style.display = 'block';
-            document.getElementById('results-unlock-text').textContent = '¡Próximo curso desbloqueado!';
-        } else {
-            unlockEl.style.display = 'none';
-        }
-    },
-
-    confirmExit() {
-        App.showModal(
-            '¿Salir del quiz?',
-            'Perderás el progreso de este quiz.',
-            () => { Timer.stop(); App.navigate('home'); }
-        );
-    },
-
-    shuffle(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
+        const accuracy = Math.round((this.correctCount / this.questions.length) * 100);
+        App.showQuizResults(this.correctCount, this.questions.length, accuracy);
     }
 };
+

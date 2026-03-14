@@ -23,25 +23,41 @@
       "electron/**/*"
     ],
     "linux": {
-      "target": ["AppImage", "deb"],
+      "target": [
+        "AppImage",
+        "deb"
+      ],
       "icon": "assets/icons/icon.png",
       "category": "Education"
     },
     "win": {
-      "target": ["nsis"],
+      "target": [
+        "nsis"
+      ],
       "icon": "assets/icons/icon.png"
     },
     "mac": {
-      "target": ["dmg"],
+      "target": [
+        "dmg"
+      ],
       "icon": "assets/icons/icon.png",
       "category": "public.app-category.education"
     }
   },
-  "keywords": ["education", "english", "learning", "quiz", "game"],
+  "keywords": [
+    "education",
+    "english",
+    "learning",
+    "quiz",
+    "game"
+  ],
   "author": "LinguaQuest Team",
   "license": "MIT",
   "devDependencies": {
     "electron": "^28.0.0",
     "electron-builder": "^24.9.0"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.7.0"
   }
 }

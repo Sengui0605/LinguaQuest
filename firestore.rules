@@ -6,5 +6,18 @@ service cloud.firestore {
     match /users/{userId} {
       allow read, write: if true;
     }
+    
+    // Las licencias solo pueden ser leídas por la app para validar.
+    // La CREACIÓN solo se hará desde el Firebase Console (por ti).
+    match /teacher_licenses/{licenseKey} {
+      allow read: if true;
+      allow update: if true;
+      allow write: if false; 
+    }
+    
+    // Los códigos de clase deben poder crearse y leerse
+    match /active_codes/{code} {
+      allow read, write: if true;
+    }
   }
 }

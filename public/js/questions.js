@@ -1134,3 +1134,372 @@ QuestionsDB["quantifiers"] = [
     { q: "Select: 'There is ___ traffic today.'", o: ["many", "a few", "a lot of", "several"], a: 2, hint: "Traffic is uncountable" },
     { q: "'Plenty of' means:", o: ["Poco", "Nada", "Mucho/Suficiente", "Demasiado"], a: 2 }
 ];
+
+// ==================== NEW BASIC COURSES ====================
+
+QuestionsDB["health"] = [
+    { q: "What do you do if you have a fever?", o: ["See a doctor", "Go to the gym", "Eat spicy food", "Sing a song"], a: 0, hint: "Medical help" },
+    { q: "Where do you buy medicine?", o: ["Pharmacy", "Library", "Museum", "Cinema"], a: 0, hint: "Drugstore" },
+    { q: "Select: 'I have a ___.' (doler la cabeza)", o: ["headache", "stomachache", "toothache", "backache"], a: 0, hint: "Head + ache" },
+    { q: "Select: 'I need to see a ___.'", o: ["dentist", "waiter", "pilot", "chef"], a: 0, hint: "Tooth pain" },
+    { q: "Select: 'Wash your ___ before eating.'", o: ["hands", "shoes", "cars", "hair"], a: 0, hint: "Hygiene" },
+    { q: "Select: 'Exercise is good for your ___.'", o: ["health", "wallet", "furniture", "fridge"], a: 0, hint: "Body wellness" },
+    { q: "What's the symptom: 'Atishoo!'", o: ["Sneeze", "Cough", "Laugh", "Cry"], a: 0, hint: "Cold symptom" },
+    { q: "Select: 'Eat more ___ and vegetables.'", o: ["fruit", "candy", "chips", "pizza"], a: 0, hint: "Healthy diet" },
+    { q: "Select: 'I feel ___.' (estoy enfermo)", o: ["sick", "happy", "excited", "rich"], a: 0, hint: "Illness" },
+    { q: "Select: 'Drink plenty of ___.'", o: ["water", "soda", "oil", "ink"], a: 0, hint: "Hydration" },
+    { q: "Part of the body for breathing:", o: ["Lungs", "Stomach", "Knees", "Elbows"], a: 0, hint: "Chest organs" },
+    { q: "Select: 'My leg ___.' (me duele)", o: ["hurts", "sings", "works", "flies"], a: 0, hint: "Pain" },
+    { q: "Select: '___ healthy food.'", o: ["Eat", "Read", "Listen", "Drive"], a: 0, hint: "Action for health" },
+    { q: "Tool for measuring temperature:", o: ["Thermometer", "Ruler", "Compass", "Clock"], a: 0, hint: "Heat check" },
+    { q: "Select: 'Get enough ___.' (8 hours)", o: ["sleep", "work", "TV", "games"], a: 0, hint: "Rest" }
+];
+
+QuestionsDB["school"] = [
+    { q: "Where do you sit in class?", o: ["At a desk", "On the floor", "In the sink", "On the roof"], a: 0, hint: "Classroom furniture" },
+    { q: "Tool for writing on paper:", o: ["Pen", "Fork", "Hammer", "Spoon"], a: 0, hint: "Writing instrument" },
+    { q: "Who teaches the students?", o: ["Teacher", "Student", "Janitor", "Cook"], a: 0, hint: "School staff" },
+    { q: "Subject about numbers:", o: ["Math", "History", "Art", "Music"], a: 0, hint: "Mathematics" },
+    { q: "Where do you carry your books?", o: ["Backpack", "Pocket", "Hat", "Gloves"], a: 0, hint: "School bag" },
+    { q: "Select: 'Raise your ___ to speak.'", o: ["hand", "foot", "eye", "ear"], a: 0, hint: "Classroom rule" },
+    { q: "Subject about the past:", o: ["History", "Science", "Geography", "Music"], a: 0, hint: "Past events" },
+    { q: "Tool for erasing pencil:", o: ["Eraser", "Scissor", "Glue", "Ruler"], a: 0, hint: "Correction tool" },
+    { q: "Where do you eat lunch?", o: ["Cafeteria", "Library", "Office", "Gym"], a: 0, hint: "School dining room" },
+    { q: "Select: 'Open your ___ to page 10.'", o: ["book", "window", "fridge", "car"], a: 0, hint: "Learning material" },
+    { q: "Subject about drawing:", o: ["Art", "Physics", "Chemistry", "PE"], a: 0, hint: "Creative subject" },
+    { q: "Select: 'Don't ___ in the hallway.'", o: ["run", "sleep", "fly", "swim"], a: 0, hint: "School safety" },
+    { q: "Tool for cutting paper:", o: ["Scissors", "Pencils", "Brushes", "Markers"], a: 0, hint: "Sharp tool" },
+    { q: "Subject about atoms and life:", o: ["Science", "Math", "History", "English"], a: 0, hint: "Natural world" },
+    { q: "Select: 'Do your ___ at home.'", o: ["homework", "dishes", "laundry", "shopping"], a: 0, hint: "School tasks" }
+];
+
+QuestionsDB["travel-basics"] = [
+    { q: "Official document for travel:", o: ["Passport", "Ticket", "Menu", "Letter"], a: 0, hint: "ID for borders" },
+    { q: "Where do airplanes land?", o: ["Airport", "Station", "Port", "Stable"], a: 0, hint: "Aviation hub" },
+    { q: "Select: 'I'd like a window ___.'", o: ["seat", "table", "bed", "door"], a: 0, hint: "Place to sit" },
+    { q: "Where do you stay on vacation?", o: ["Hotel", "Factory", "Bank", "Hospital"], a: 0, hint: "Accommodation" },
+    { q: "Select: 'Pack your ___.'", o: ["suitcase", "fridge", "house", "car"], a: 0, hint: "Travel bag" },
+    { q: "Means of transport on tracks:", o: ["Train", "Bus", "Taxi", "Plane"], a: 0, hint: "Railway" },
+    { q: "Select: 'Buy a ___ for the bus.'", o: ["ticket", "passport", "map", "journal"], a: 0, hint: "Travel receipt" },
+    { q: "Person who flies a plane:", o: ["Pilot", "Driver", "Captain", "Chef"], a: 0, hint: "Aviation professional" },
+    { q: "Where do you catch a bus?", o: ["Bus stop", "Dock", "Runway", "Forest"], a: 0, hint: "Waiting area" },
+    { q: "Plan for a trip:", o: ["Itinerary", "Menu", "Playlist", "Novel"], a: 0, hint: "Travel schedule" },
+    { q: "Select: 'Let's go ___.' (hacer turismo)", o: ["sightseeing", "fishing", "hunting", "sleeping"], a: 0, hint: "Seeing attractions" },
+    { q: "Thing used to carry clothes:", o: ["Luggage", "Furniture", "Garage", "Pantry"], a: 0, hint: "Baggage" },
+    { q: "Select: 'The flight is ___.' (retrasado)", o: ["delayed", "early", "fast", "blue"], a: 0, hint: "On-time opposite" },
+    { q: "Where do you check in?", o: ["Reception", "Kitchen", "Bathroom", "Garden"], a: 0, hint: "Registration desk" },
+    { q: "Select: 'Enjoy your ___.'", o: ["trip", "work", "test", "problem"], a: 0, hint: "Farewell to traveler" }
+];
+
+QuestionsDB["family-extended"] = [
+    { q: "Child of your uncle/aunt:", o: ["Cousin", "Brother", "Nephew", "Niece"], a: 0, hint: "Family relation" },
+    { q: "Father of your father:", o: ["Grandfather", "Uncle", "Nephew", "Son"], a: 0, hint: "Senior male" },
+    { q: "Sister of your mother:", o: ["Aunt", "Cousin", "Niece", "Grandmother"], a: 0, hint: "Female relative" },
+    { q: "Son of your brother/sister:", o: ["Nephew", "Niece", "Son", "Cousin"], a: 0, hint: "Sibling's son" },
+    { q: "Mother of your husband/wife:", o: ["Mother-in-law", "Sister-in-law", "Aunt", "Cousin"], a: 0, hint: "Family by marriage" },
+    { q: "Married man:", o: ["Husband", "Wife", "Boyfriend", "Single"], a: 0, hint: "Spouse (male)" },
+    { q: "Select: 'I have many ___.' (parientes)", o: ["relatives", "friends", "neighbors", "bosses"], a: 0, hint: "Family members" },
+    { q: "The woman you are married to:", o: ["Wife", "Sister", "Mother", "Waitress"], a: 0, hint: "Spouse (female)" },
+    { q: "Your female child:", o: ["Daughter", "Son", "Sister", "Niece"], a: 0, hint: "Offspring (female)" },
+    { q: "Brother of your father:", o: ["Uncle", "Aunt", "Nephew", "Grandfather"], a: 0, hint: "Male relative" },
+    { q: "Daughter of your sister:", o: ["Niece", "Nephew", "Cousin", "Daughter"], a: 0, hint: "Sibling's daughter" },
+    { q: "Mother of your mother:", o: ["Grandmother", "Grandfather", "Aunt", "Mother"], a: 0, hint: "Senior female" },
+    { q: "Select: 'We are ___.' (parientes lejanos)", o: ["distant relatives", "close friends", "enemies", "strangers"], a: 0, hint: "Far family" },
+    { q: "Person you are engaged to:", o: ["Fiancé", "Boyfriend", "Husband", "Father"], a: 0, hint: "Future spouse" },
+    { q: "Group of parents and children:", o: ["Family", "Team", "Class", "Band"], a: 0, hint: "Core home group" }
+];
+
+QuestionsDB["hobbies-interests"] = [
+    { q: "Select: 'I like ___ books.'", o: ["reading", "driving", "eating", "singing"], a: 0, hint: "Activity with books" },
+    { q: "Musical skill:", o: ["Playing piano", "Running", "Cooking", "Coding"], a: 0, hint: "Instrument use" },
+    { q: "Sport in water:", o: ["Swimming", "Skiing", "Cycling", "Boxing"], a: 0, hint: "Pool activity" },
+    { q: "Select: 'He's interested ___ photography.'", o: ["in", "on", "at", "to"], a: 0, hint: "Interested + preposicion" },
+    { q: "Activity with a mountain:", o: ["Hiking", "Sailing", "Bowling", "Dancing"], a: 0, hint: "Outdoor walking" },
+    { q: "Hobby with a computer:", o: ["Gaming", "Swimming", "Gardening", "Skating"], a: 0, hint: "Digital fun" },
+    { q: "Select: 'She enjoys ___.' (cocinar)", o: ["cooking", "cleaning", "sleeping", "working"], a: 0, hint: "Enjoys + ing" },
+    { q: "Activity with seeds and plants:", o: ["Gardening", "Surfing", "Singing", "Writing"], a: 0, hint: "Nature hobby" },
+    { q: "Creating art with colors:", o: ["Painting", "Running", "Driving", "Fishing"], a: 0, hint: "Visual art" },
+    { q: "Activity with a camera:", o: ["Photography", "Sculpture", "Dance", "Opera"], a: 0, hint: "Taking photos" },
+    { q: "Select: 'Running is my favorite ___.'", o: ["hobby", "job", "food", "animal"], a: 0, hint: "Free time activity" },
+    { q: "Moving to music:", o: ["Dancing", "Reading", "Sleeping", "Coding"], a: 0, hint: "Artistic movement" },
+    { q: "Singing alone or in a group:", o: ["Singing", "Cooking", "Chess", "Golf"], a: 0, hint: "Vocal music" },
+    { q: "Strategy game with pieces:", o: ["Chess", "Tennis", "Yoga", "Karate"], a: 0, hint: "Board game" },
+    { q: "Select: 'I ___ collect stamps.'", o: ["tend to", "finish", "speak", "look"], a: 0, hint: "Habit" }
+];
+
+QuestionsDB["shopping-vocabulary"] = [
+    { q: "Price of an item:", o: ["Cost", "Weight", "Color", "Size"], a: 0, hint: "Money needed" },
+    { q: "Area for buying food:", o: ["Supermarket", "Museum", "Cinema", "Gym"], a: 0, hint: "Grocery store" },
+    { q: "Select: 'Is this ___ sale?'", o: ["on", "at", "in", "to"], a: 0, hint: "On sale" },
+    { q: "Paper with total price:", o: ["Receipt", "Passport", "Letter", "Card"], a: 0, hint: "Proof of purchase" },
+    { q: "Select: 'Can I ___ this on?'", o: ["try", "buy", "sell", "eat"], a: 0, hint: "Fitting room" },
+    { q: "Lower price than usual:", o: ["Discount", "Tax", "Fee", "Profit"], a: 0, hint: "Offer" },
+    { q: "Person who buys:", o: ["Customer", "Seller", "Manager", "Owner"], a: 0, hint: "Shopper" },
+    { q: "Place to try clothes:", o: ["Fitting room", "Kitchen", "Office", "Garage"], a: 0, hint: "Dressing area" },
+    { q: "Select: 'How ___ is this?'", o: ["much", "many", "old", "far"], a: 0, hint: "Asking price" },
+    { q: "Device to carry groceries:", o: ["Trolley", "Oven", "Chair", "Clock"], a: 0, hint: "Cart" },
+    { q: "Plastic used for payment:", o: ["Credit card", "Coin", "Cash", "Gift"], a: 0, hint: "Electronic pay" },
+    { q: "Select: 'That's very ___!' (barato)", o: ["cheap", "expensive", "heavy", "tall"], a: 0, hint: "Low cost" },
+    { q: "Opposite of cheap:", o: ["Expensive", "Beautiful", "Clean", "Easy"], a: 0, hint: "High cost" },
+    { q: "Person who assists customers:", o: ["Shop assistant", "Pilot", "Doctor", "Guard"], a: 0, hint: "Store clerk" },
+    { q: "Select: 'Take your ___.' (vuelto)", o: ["change", "money", "paper", "bag"], a: 0, hint: "Returned money" }
+];
+
+QuestionsDB["city-places"] = [
+    { q: "Where do you borrow books?", o: ["Library", "Bank", "Police station", "Statue"], a: 0, hint: "Place for reading" },
+    { q: "Where do you keep money?", o: ["Bank", "Bakery", "Gym", "Church"], a: 0, hint: "Financial place" },
+    { q: "Stop for a bus:", o: ["Bus stop", "Airport", "Dock", "Runway"], a: 0, hint: "Waiting area" },
+    { q: "Select: 'The park is ___ the bank.'", o: ["next to", "in", "at", "on"], a: 0, hint: "Distance description" },
+    { q: "Where do you buy bread?", o: ["Bakery", "Butcher", "Pharmacy", "Library"], a: 0, hint: "Bread shop" },
+    { q: "Where do police work?", o: ["Police station", "Fire station", "School", "Mall"], a: 0, hint: "Law enforcement" },
+    { q: "Select: 'Cross the ___.' (puente)", o: ["bridge", "river", "mountain", "cloud"], a: 0, hint: "Road structure" },
+    { q: "Area for kids to play:", o: ["Playground", "Office", "Hospital", "Factory"], a: 0, hint: "Fun area" },
+    { q: "Large store with many sections:", o: ["Department store", "Kiosk", "Bakery", "Cafe"], a: 0, hint: "Big mall" },
+    { q: "Where do people see art?", o: ["Museum", "Zoo", "Pool", "Stadium"], a: 0, hint: "Galleries" },
+    { q: "Select: 'Go ___ ahead.'", o: ["straight", "circle", "up", "back"], a: 0, hint: "Directions" },
+    { q: "Place to eat out:", o: ["Restaurant", "School", "Bank", "Park"], a: 0, hint: "Dining place" },
+    { q: "Where do you pray?", o: ["Church", "Gym", "Pharmacy", "Cinema"], a: 0, hint: "Religious place" },
+    { q: "Select: 'Turn ___ at the corner.'", o: ["left", "into", "towards", "above"], a: 0, hint: "Direction change" },
+    { q: "Open area in city center:", o: ["Square", "Forest", "Tunnel", "Beach"], a: 0, hint: "Plaza" }
+];
+
+
+// ==================== NEW INTERMEDIATE COURSES ====================
+
+QuestionsDB["business-intermediate"] = [
+    { q: "Formal way to start an email to a stranger:", o: ["Dear Sir/Madam", "Hey there", "Hi friend", "What's up"], a: 0, hint: "Professional greeting" },
+    { q: "Select: 'I look forward to ___ from you.'", o: ["hearing", "hear", "heard", "hears"], a: 0, hint: "Look forward to + ing" },
+    { q: "A formal meeting to discuss business:", o: ["Conference", "Party", "Hangout", "Walk"], a: 0, hint: "Work gathering" },
+    { q: "Select: 'We need to ___ a decision.'", o: ["make", "do", "take", "get"], a: 0, hint: "Make + decision" },
+    { q: "Summary of your work experience:", o: ["Resume / CV", "Diary", "Novel", "Receipt"], a: 0, hint: "Job application document" },
+    { q: "Person in charge of a company:", o: ["CEO", "Customer", "Intern", "Competitor"], a: 0, hint: "Top executive" },
+    { q: "Select: 'I'll get back ___ you soon.'", o: ["to", "at", "with", "for"], a: 0, hint: "Phrasal: return info" },
+    { q: "Money earned after expenses:", o: ["Profit", "Loss", "Debt", "Tax"], a: 0, hint: "Financial gain" },
+    { q: "Select: 'She was ___ for the job.'", o: ["hired", "fired", "retired", "tired"], a: 0, hint: "Given a job" },
+    { q: "Plan to achieve a goal:", o: ["Strategy", "Mistake", "Accident", "Dream"], a: 0, hint: "Calculated plan" },
+    { q: "Select: 'Please find ___ the document.'", o: ["attached", "inside", "below", "behind"], a: 0, hint: "Email file term" },
+    { q: "Short meeting for quick updates:", o: ["Briefing", "Vacation", "Holiday", "Break"], a: 0, hint: "Quick info session" },
+    { q: "Select: 'We are ___ out of stock.'", o: ["running", "walking", "going", "seeing"], a: 0, hint: "Phrasal: no more left" },
+    { q: "The fixed amount of money you earn:", o: ["Salary", "Tip", "Gift", "Loan"], a: 0, hint: "Regular pay" },
+    { q: "Select: 'It's a ___ situation.' (ganamos todos)", o: ["win-win", "lose-lose", "no-go", "high-end"], a: 0, hint: "Mutual benefit" }
+];
+
+QuestionsDB["it-tech"] = [
+    { q: "Error in a computer program:", o: ["Bug", "Virus", "Feature", "Chip"], a: 0, hint: "Small mistake in code" },
+    { q: "Select: 'Did you ___ your files?'", o: ["backup", "break", "burn", "borrow"], a: 0, hint: "Save copies" },
+    { q: "Physical parts of a computer:", o: ["Hardware", "Software", "Cloud", "Data"], a: 0, hint: "Tangible objects" },
+    { q: "Select: 'Try to ___ the router.'", o: ["reboot", "reinstall", "refill", "repair"], a: 0, hint: "Restart" },
+    { q: "Global network of computers:", o: ["Internet", "Intranet", "Lan", "VGA"], a: 0, hint: "The web" },
+    { q: "Secret word to access accounts:", o: ["Password", "Username", "Cookie", "Cache"], a: 0, hint: "Security code" },
+    { q: "Select: 'I need to ___ the app.' (update)", o: ["upgrade", "delete", "post", "send"], a: 0, hint: "Install newer version" },
+    { q: "Device for pointing and clicking:", o: ["Mouse", "Keyboard", "Scanner", "Printer"], a: 0, hint: "Input device" },
+    { q: "Where files are stored online:", o: ["The Cloud", "The Forest", "The Sea", "The Sky"], a: 0, hint: "Remote storage" },
+    { q: "Select: 'My battery is ___.' (baja)", o: ["low", "small", "short", "little"], a: 0, hint: "Emptying" },
+    { q: "Small image for an app:", o: ["Icon", "Pixel", "Resolution", "Frame"], a: 0, hint: "Visual symbol" },
+    { q: "Select: 'I lost my ___ connection.'", o: ["Wi-Fi", "Radio", "AC", "DC"], a: 0, hint: "Wireless internet" },
+    { q: "Software that helps you browse:", o: ["Browser", "Server", "Driver", "Engine"], a: 0, hint: "Chrome, Safari, etc." },
+    { q: "Select: 'The screen is ___.' (congelada)", o: ["frozen", "cold", "stuck", "broken"], a: 0, hint: "Not responding" },
+    { q: "Action of saving on your PC from web:", o: ["Download", "Upload", "Post", "Delete"], a: 0, hint: "Get from net" }
+];
+
+QuestionsDB["environment-nature"] = [
+    { q: "The process of reusing waste:", o: ["Recycling", "Pollution", "Deforestation", "Erosion"], a: 0, hint: "Eco-friendly action" },
+    { q: "Select: 'We must ___ energy.'", o: ["save", "waste", "spend", "kill"], a: 0, hint: "Economize" },
+    { q: "Long-term change in Earth's weather:", o: ["Climate change", "Storm", "Season", "Tides"], a: 0, hint: "Global warming" },
+    { q: "Select: 'Cut ___ on plastic.'", o: ["back", "out", "off", "up"], a: 0, hint: "Reduce use" },
+    { q: "Harmful things in air or water:", o: ["Pollution", "Fertilizer", "Oxygen", "Steam"], a: 0, hint: "Contamination" },
+    { q: "Forests being cut down:", o: ["Deforestation", "Garden", "Park", "Desert"], a: 0, hint: "Trees disappearing" },
+    { q: "Select: 'Solar power is ___ energy.'", o: ["renewable", "dirty", "old", "lost"], a: 0, hint: "Clean source" },
+    { q: "Group of living things in an area:", o: ["Ecosystem", "Factory", "Mall", "Museum"], a: 0, hint: "Nature balance" },
+    { q: "The natural home of an animal:", o: ["Habitat", "Cage", "Zoo", "Farm"], a: 0, hint: "Native place" },
+    { q: "Select: 'Protect ___ species.'", o: ["endangered", "dangerous", "happy", "new"], a: 0, hint: "At risk of extinction" },
+    { q: "Melting of ice in the poles:", o: ["Global warming", "Winter", "Spring", "Flood"], a: 0, hint: "Temp rising" },
+    { q: "Select: 'Use ___ bags.' (reutilizables)", o: ["reusable", "disposable", "paper", "thin"], a: 0, hint: "Not for one use" },
+    { q: "Power from the sun:", o: ["Solar energy", "Wind", "Coal", "Gas"], a: 0, hint: "Sunlight power" },
+    { q: "Select: 'Plant more ___.'", o: ["trees", "cars", "buildings", "roads"], a: 0, hint: "O2 producers" },
+    { q: "Chemicals that protect crops:", o: ["Pesticides", "Candies", "Oils", "Soaps"], a: 0, hint: "Bug killers" }
+];
+
+QuestionsDB["music-arts"] = [
+    { q: "Highness or lowness of a sound:", o: ["Pitch", "Volume", "Tempo", "Beat"], a: 0, hint: "Musical note" },
+    { q: "Select: 'I love ___ music.' (en vivo)", o: ["live", "life", "living", "alive"], a: 0, hint: "At a concert" },
+    { q: "A person who leads an orchestra:", o: ["Conductor", "Driver", "Pilot", "Captain"], a: 0, hint: "Baton user" },
+    { q: "Select: 'Play it ___.' (fuerte)", o: ["loud", "quiet", "slow", "fast"], a: 0, hint: "Volume increase" },
+    { q: "Painting of a person:", o: ["Portrait", "Landscape", "Abstract", "Sketch"], a: 0, hint: "Face focus" },
+    { q: "Speed of a piece of music:", o: ["Tempo", "Rhythm", "Instrument", "Chord"], a: 0, hint: "Fast or slow" },
+    { q: "Select: 'The band is ___ tour.'", o: ["on", "at", "in", "to"], a: 0, hint: "Traveling" },
+    { q: "Where actors perform:", o: ["Stage", "Screen", "Kitchen", "Court"], a: 0, hint: "Theater platform" },
+    { q: "Select: 'Sing the ___.' (estribillo)", o: ["chorus", "verse", "intro", "outro"], a: 0, hint: "Main part" },
+    { q: "Group of singers:", o: ["Choir", "Band", "Orchestra", "Soloist"], a: 0, hint: "Vocals only" },
+    { q: "Tool for painting:", o: ["Brush", "Pen", "Hammer", "Knife"], a: 0, hint: "Paint applicator" },
+    { q: "Select: 'The show was ___ out.' (agotado)", o: ["sold", "bought", "given", "sent"], a: 0, hint: "No tickets left" },
+    { q: "Art from stone or wood:", o: ["Sculpture", "Painting", "Drawing", "Dance"], a: 0, hint: "3D art" },
+    { q: "Select: 'Practice makes ___.'", o: ["perfect", "good", "better", "best"], a: 0, hint: "Idiom" },
+    { q: "Words of a song:", o: ["Lyrics", "Notes", "Beats", "Titles"], a: 0, hint: "Song text" }
+];
+
+QuestionsDB["cinema-movies"] = [
+    { q: "Main story of a movie:", o: ["Plot", "Cast", "Crew", "Theme"], a: 0, hint: "The events" },
+    { q: "Select: 'The movie was ___.' (filmada)", o: ["shot", "hit", "run", "seen"], a: 0, hint: "Filmed" },
+    { q: "All the actors in a film:", o: ["Cast", "Staff", "Audience", "Critics"], a: 0, hint: "Performers" },
+    { q: "Select: 'It was a ___.' (éxito)", o: ["blockbuster", "fail", "boring", "long"], a: 0, hint: "Big success" },
+    { q: "Person who makes artistic decisions:", o: ["Director", "Actor", "Stuntman", "Fan"], a: 0, hint: "Film boss" },
+    { q: "Genre that makes you laugh:", o: ["Comedy", "Horror", "Action", "Drama"], a: 0, hint: "Funny" },
+    { q: "Select: 'I hate ___.' (spoilers)", o: ["spoilers", "previews", "trailers", "ads"], a: 0, hint: "Ruining surprises" },
+    { q: "Translation at the bottom of screen:", o: ["Subtitles", "Titles", "Captions", "Credits"], a: 0, hint: "On-screen text" },
+    { q: "A follow-up to a successful movie:", o: ["Sequel", "Prequel", "Remake", "Original"], a: 0, hint: "Part 2" },
+    { q: "Select: 'The special ___ were great.' (efectos)", o: ["effects", "affects", "things", "lights"], a: 0, hint: "Visual tricks" },
+    { q: "Movie with scary elements:", o: ["Horror", "Documentary", "Romance", "History"], a: 0, hint: "Scary" },
+    { q: "Select: 'Who ___ the main role?'", o: ["plays", "runs", "does", "acts"], a: 0, hint: "Performs" },
+    { q: "Short video for a new movie:", o: ["Trailer", "Poster", "Script", "Ticket"], a: 0, hint: "Preview" },
+    { q: "Select: 'Based ___ a true story.'", o: ["on", "at", "in", "with"], a: 0, hint: "Origin" },
+    { q: "The text actors read:", o: ["Script", "Novel", "Letter", "Manual"], a: 0, hint: "Screenplay" }
+];
+
+QuestionsDB["social-media-internet"] = [
+    { q: "Select: 'Please ___ my post.' (compartir)", o: ["share", "send", "cut", "read"], a: 0, hint: "Send to others" },
+    { q: "Image and info about yourself:", o: ["Profile", "Settings", "Home", "Files"], a: 0, hint: "User page" },
+    { q: "Select: 'I was ___ by a troll.'", o: ["blocked", "followed", "liked", "added"], a: 0, hint: "Restricted" },
+    { q: "Tag using #:", o: ["Hashtag", "Handle", "Link", "At"], a: 0, hint: "Symbol for trends" },
+    { q: "Select: 'The video went ___.' (viral)", o: ["viral", "wrong", "fast", "bad"], a: 0, hint: "Everyone saw it" },
+    { q: "Someone who follows you:", o: ["Follower", "Liker", "Sharer", "Subscriber"], a: 0, hint: "Audience member" },
+    { q: "Select: 'Turn on ___.' (notificaciones)", o: ["notifications", "lights", "settings", "sounds"], a: 0, hint: "Alerts" },
+    { q: "Where you type a website name:", o: ["Address bar", "Search engine", "Desktop", "Folder"], a: 0, hint: "Upper browser part" },
+    { q: "Select: 'I ___ an account.' (creé)", o: ["set up", "set down", "set off", "set in"], a: 0, hint: "Phrasal: create" },
+    { q: "Small file with search data:", o: ["Cookie", "Burger", "Pizza", "Candy"], a: 0, hint: "Web tracking" },
+    { q: "Select: 'Check your ___.' (ajustes)", o: ["settings", "posts", "likes", "chats"], a: 0, hint: "Configuration" },
+    { q: "Place to browse anonymously:", o: ["Incognito mode", "Private room", "Closed tab", "Cache"], a: 0, hint: "Hidden history" },
+    { q: "Select: 'Stop ___!' (acoso)", o: ["cyberbullying", "chatting", "browsing", "coding"], a: 0, hint: "Online harassment" },
+    { q: "Illegal access to a computer:", o: ["Hacking", "Connecting", "Formatting", "Loading"], a: 0, hint: "Cracking" },
+    { q: "Select: 'My Wi-Fi is ___.' (débil)", o: ["weak", "small", "low", "thin"], a: 0, hint: "Poor signal" }
+];
+
+QuestionsDB["sports-fitness"] = [
+    { q: "Person who trains an athlete:", o: ["Coach", "Referee", "Fan", "Umpire"], a: 0, hint: "Instructor" },
+    { q: "Select: 'I go to the ___ daily.' (gym)", o: ["gym", "office", "bank", "park"], a: 0, hint: "Exercise place" },
+    { q: "Where tennis is played:", o: ["Court", "Field", "Pitch", "Track"], a: 0, hint: "Area with net" },
+    { q: "Select: 'We won the ___.' (partido)", o: ["match", "game", "meet", "race"], a: 0, hint: "Contest" },
+    { q: "Equipment for lifting heavy weights:", o: ["Dumbbells", "Rackets", "Balls", "Bats"], a: 0, hint: "Strength tool" },
+    { q: "The end of a race:", o: ["Finish line", "Starting point", "Corner", "Goal"], a: 0, hint: "Final spot" },
+    { q: "Select: 'Warm ___ before running.'", o: ["up", "down", "off", "back"], a: 0, hint: "Phrasal: prep body" },
+    { q: "Group of people playing together:", o: ["Team", "Club", "Crowd", "Class"], a: 0, hint: "Sports group" },
+    { q: "Person who watches a game:", o: ["Spectator", "Player", "Athlete", "Scout"], a: 0, hint: "Viewer" },
+    { q: "Select: 'It was a ___.' (empate)", o: ["draw", "win", "loss", "fault"], a: 0, hint: "Equal score" },
+    { q: "Rule breaker punishment:", o: ["Penalty", "Goal", "Point", "Set"], a: 0, hint: "Sanction" },
+    { q: "Select: 'Stay ___.' (en forma)", o: ["in shape", "in line", "out of it", "well"], a: 0, hint: "Fit" },
+    { q: "Competition for the first place:", o: ["Championship", "Training", "Warm-up", "Friendly"], a: 0, hint: "Main tournament" },
+    { q: "Select: 'Stretch your ___.' (músculos)", o: ["muscles", "bones", "shoes", "hair"], a: 0, hint: "Athletic prep" },
+    { q: "Event every 4 years:", o: ["Olympics", "World Cup", "Both A and B", "None"], a: 2, hint: "Global events" }
+];
+
+
+// ==================== NEW ADVANCED COURSES ====================
+
+QuestionsDB["philosophy-logic"] = [
+    { q: "The branch of philosophy concerned with right and wrong:", o: ["Ethics", "Epistemology", "Aesthetics", "Metaphysics"], a: 0, hint: "Moral philosophy" },
+    { q: "Select: 'Cogito ___ sum.'", o: ["ergo", "et", "sed", "aut"], a: 0, hint: "Descartes' famous quote" },
+    { q: "A statement that contradicts itself but may be true:", o: ["Paradox", "Syllogism", "Premise", "Conclusion"], a: 0, hint: "Apparent contradiction" },
+    { q: "Select: 'Socrates was a ___ philosopher.'", o: ["Greek", "Roman", "Chinese", "Persian"], a: 0, hint: "Nationality" },
+    { q: "The study of knowledge and belief:", o: ["Epistemology", "Ontology", "Logic", "Ethics"], a: 0, hint: "Nature of knowing" },
+    { q: "Select: 'He argued ___ the existence of God.'", o: ["for", "at", "to", "with"], a: 0, hint: "Plea/Defense" },
+    { q: "Logic tool with two premises and a conclusion:", o: ["Syllogism", "Fallacy", "Analogy", "Inference"], a: 0, hint: "Deductive reasoning" },
+    { q: "Select: 'A flaw in reasoning is a ___.'", o: ["fallacy", "fact", "proof", "axiom"], a: 0, hint: "Logical error" },
+    { q: "Philosophy that focuses on individual existence:", o: ["Existentialism", "Stoicism", "Nihilism", "Platonism"], a: 0, hint: "Sartre, Camus" },
+    { q: "Select: 'Man is a ___ animal.' (Aristotle)", o: ["rational", "wild", "fast", "solitary"], a: 0, hint: "Mind-focused" },
+    { q: "The view that all knowledge comes from experience:", o: ["Empiricism", "Rationalism", "Idealism", "Skepticism"], a: 0, hint: "Evidence-based" },
+    { q: "Select: 'Duty for duty's ___.'", o: ["sake", "make", "take", "lake"], a: 0, hint: "Kant's ethics" },
+    { q: "Philosophy of enduring pain without complaining:", o: ["Stoicism", "Epicureanism", "Hedonism", "Cynicism"], a: 0, hint: "Marcus Aurelius" },
+    { q: "Select: 'The ___ cave allegory.'", o: ["Plato's", "Aristotle's", "Homer's", "Virgil's"], a: 0, hint: "Shadows on a wall" },
+    { q: "A self-evident truth:", o: ["Axiom", "Hypothesis", "Theory", "Guess"], a: 0, hint: "Starting point" }
+];
+
+QuestionsDB["economics-finance"] = [
+    { q: "The total value of goods produced in a country:", o: ["GDP", "CPI", "Inflation", "Deficit"], a: 0, hint: "Gross Domestic Product" },
+    { q: "Select: 'Supply and ___.'", o: ["demand", "cost", "price", "stock"], a: 0, hint: "Market forces" },
+    { q: "Increase in prices and fall in purchasing value:", o: ["Inflation", "Deflation", "Recession", "Growth"], a: 0, hint: "Money losing value" },
+    { q: "Select: 'The market is ___.' (alcista)", o: ["bullish", "bearish", "flat", "dead"], a: 0, hint: "Prices going up" },
+    { q: "Person who starts a business and takes risks:", o: ["Entrepreneur", "Employee", "Manager", "Investor"], a: 0, hint: "Business creator" },
+    { q: "Select: 'High risk, high ___.'", o: ["return", "cost", "debt", "tax"], a: 0, hint: "Profit potential" },
+    { q: "System where private owners control trade:", o: ["Capitalism", "Socialism", "Communism", "Feudalism"], a: 0, hint: "Free market" },
+    { q: "Select: '___ of scale.' (economías de escala)", o: ["Economies", "Savings", "Sizes", "Powers"], a: 0, hint: "Efficiency gain" },
+    { q: "An asset's ability to be converted into cash:", o: ["Liquidity", "Solvency", "Capital", "Equity"], a: 0, hint: "Availability of funds" },
+    { q: "Select: 'Don't put all your eggs in one ___.'", o: ["basket", "box", "hat", "room"], a: 0, hint: "Diversification idiom" },
+    { q: "A period of temporary economic decline:", o: ["Recession", "Boom", "Peak", "Cycle"], a: 0, hint: "Negative growth" },
+    { q: "Select: 'Monetary ___.' (política)", o: ["policy", "police", "politics", "power"], a: 0, hint: "Central bank action" },
+    { q: "Sum of money borrowed that is expected to be paid back:", o: ["Loan", "Gift", "Grant", "Tax"], a: 0, hint: "Debt" },
+    { q: "Select: 'Interest ___.' (tasa)", o: ["rate", "cost", "fee", "price"], a: 0, hint: "Cost of borrowing" },
+    { q: "Measurement of the change in price of goods:", o: ["Consumer Price Index", "Stock Market", "Revenue", "Yield"], a: 0, hint: "CPI" }
+];
+
+QuestionsDB["psychology-behavior"] = [
+    { q: "The internal process that activates behavior:", o: ["Motivation", "Learning", "Memory", "Sleep"], a: 0, hint: "Drive to act" },
+    { q: "Select: 'Nature vs ___.'", o: ["nurture", "culture", "logic", "mind"], a: 0, hint: "Genetics vs Environment" },
+    { q: "Mental shortcut used in decision making:", o: ["Heuristic", "Bias", "Insight", "Logic"], a: 0, hint: "Rule of thumb" },
+    { q: "Select: 'Pavlov's ___.'", o: ["dogs", "cats", "birds", "mice"], a: 0, hint: "Classical conditioning" },
+    { q: "The state of being aware of one's surroundings:", o: ["Consciousness", "Unconscious", "Ego", "Self"], a: 0, hint: "Awareness" },
+    { q: "Select: 'A defense ___.' (mecanismo)", o: ["mechanism", "machine", "method", "mode"], a: 0, hint: "Coping strategy" },
+    { q: "Tendency to favor information that confirms beliefs:", o: ["Confirmation bias", "Altruism", "Empathy", "Cognition"], a: 0, hint: "Mental bias" },
+    { q: "Select: 'Cognitive ___.' (disonancia)", o: ["dissonance", "distance", "difference", "delay"], a: 0, hint: "Conflicting beliefs" },
+    { q: "Theory of hierarchical human needs:", o: ["Maslow's", "Freud's", "Skinner's", "Piaget's"], a: 0, hint: "Hierarchy of Needs" },
+    { q: "Select: 'Short-term ___.' (memoria)", o: ["memory", "thinking", "vision", "action"], a: 0, hint: "RAM of the brain" },
+    { q: "Ability to understand and share feelings of others:", o: ["Empathy", "Sympathy", "Apathy", "Sociopathy"], a: 0, hint: "Emotional connection" },
+    { q: "Select: 'Positive ___.' (refuerzo)", o: ["reinforcement", "support", "help", "reward"], a: 0, hint: "Behavioral boost" },
+    { q: "Study of how people think about others:", o: ["Social psychology", "Clinical", "Developmental", "Industrial"], a: 0, hint: "Group behavior" },
+    { q: "Select: 'The bystander ___.'", o: ["effect", "fact", "case", "law"], a: 0, hint: "Non-intervention in groups" },
+    { q: "Subconscious part of mind according to Freud:", o: ["Id", "Ego", "Superego", "All of the above"], a: 3, hint: "Structural model" }
+];
+
+QuestionsDB["literature-analysis"] = [
+    { q: "Comparison without using 'like' or 'as':", o: ["Metaphor", "Simile", "Personification", "Hyperbole"], a: 0, hint: "Direct comparison" },
+    { q: "Select: 'The ___ of the story.' (protagonista)", o: ["protagonist", "antagonist", "villain", "narrator"], a: 0, hint: "Main character" },
+    { q: "Recurring element with symbolic significance:", o: ["Motif", "Theme", "Climax", "Exposition"], a: 0, hint: "Pattern" },
+    { q: "Select: 'To be or ___ to be.'", o: ["not", "never", "only", "maybe"], a: 0, hint: "Shakespeare" },
+    { q: "Giving human qualities to animals or objects:", o: ["Personification", "Analogy", "Irony", "Satire"], a: 0, hint: "Human-like" },
+    { q: "Select: 'An omniscient ___.'", o: ["narrator", "author", "character", "reader"], a: 0, hint: "All-knowing voice" },
+    { q: "The use of humor or exaggeration to criticize:", o: ["Satire", "Tragedy", "Comedy", "Epic"], a: 0, hint: "Critical irony" },
+    { q: "Select: 'A dramatic ___.' (ironía)", o: ["irony", "scene", "act", "pause"], a: 0, hint: "Reader knows more" },
+    { q: "Turning point of highest tension in a plot:", o: ["Climax", "Intro", "Ending", "Conflict"], a: 0, hint: "Peak" },
+    { q: "Select: 'Stream of ___.'", o: ["consciousness", "thought", "words", "life"], a: 0, hint: "Narrative technique" },
+    { q: "Brief reference to a person, place or event:", o: ["Allusion", "Illusion", "Elusion", "Inclusion"], a: 0, hint: "Indirect mention" },
+    { q: "Select: 'A tragic ___.' (falla)", o: ["flaw", "fall", "fail", "flow"], a: 0, hint: "Hamartia" },
+    { q: "Poem with 14 lines and specific rhyme scheme:", o: ["Sonnet", "Haiku", "Limerick", "Ballad"], a: 0, hint: "Shakespearean form" },
+    { q: "Select: 'The setting ___.' (lugar/tiempo)", o: ["context", "scene", "place", "frame"], a: 1, hint: "Where/When" },
+    { q: "Language that appeals to the senses:", o: ["Imagery", "Logic", "Grammar", "Punctuation"], a: 0, hint: "Sensory words" }
+];
+
+QuestionsDB["global-politics"] = [
+    { q: "The art of managing international relations:", o: ["Diplomacy", "War", "Trade", "Law"], a: 0, hint: "Peaceful negotiation" },
+    { q: "Select: 'United ___.'", o: ["Nations", "Countries", "States", "Land"], a: 0, hint: "UN" },
+    { q: "Power of a state to govern itself:", o: ["Sovereignty", "Democracy", "Dictatorship", "Colony"], a: 0, hint: "Independence" },
+    { q: "Select: '___ of power.' (equilibrio)", o: ["Balance", "Scale", "Weight", "Truth"], a: 0, hint: "International stability" },
+    { q: "System where citizens elect representatives:", o: ["Democracy", "Monarchy", "Oligarchy", "Theocracy"], a: 0, hint: "Voting system" },
+    { q: "Select: 'Human ___ violations.'", o: ["rights", "laws", "rules", "facts"], a: 0, hint: "Fundamental freedoms" },
+    { q: "Economic penalty against a country:", o: ["Sanction", "Grant", "Loan", "Award"], a: 0, hint: "Restrictive measure" },
+    { q: "Select: 'Foreign ___.' (política)", o: ["policy", "politics", "police", "power"], a: 0, hint: "Relations with others" },
+    { q: "Formal agreement between countries:", o: ["Treaty", "Contract", "Letter", "Memo"], a: 0, hint: "Pact" },
+    { q: "Select: 'Non-governmental ___.'", o: ["organization (NGO)", "group", "team", "party"], a: 0, hint: "Civil society actor" },
+    { q: "Influence of a country beyond its borders:", o: ["Soft power", "Hard rock", "Fast track", "Long walk"], a: 0, hint: "Cultural/Diplomatic draw" },
+    { q: "Select: 'Political ___.' (ideología)", o: ["ideology", "ideal", "idea", "image"], a: 0, hint: "System of beliefs" },
+    { q: "The study of the impact of geography on politics:", o: ["Geopolitics", "Ecology", "History", "Sociology"], a: 0, hint: "Earth + Politics" },
+    { q: "Select: 'Arms ___.' (carrera armamentista)", o: ["race", "run", "game", "walk"], a: 0, hint: "Competitive building" },
+    { q: "Branch of government that makes laws:", o: ["Legislature", "Executive", "Judiciary", "Military"], a: 0, hint: "Parliament" }
+];
+
+QuestionsDB["academic-writing"] = [
+    { q: "Central argument of an essay:", o: ["Thesis statement", "Introduction", "Conclusion", "Title"], a: 0, hint: "Main point" },
+    { q: "Select: '___ your sources.' (citar)", o: ["Cite", "Site", "Sight", "Side"], a: 0, hint: "Reference authors" },
+    { q: "Summary at the beginning of a research paper:", o: ["Abstract", "Index", "Appendix", "Footnote"], a: 0, hint: "Overview" },
+    { q: "Select: 'Avoid ___.' (plagio)", o: ["plagiarism", "reading", "typing", "editing"], a: 0, hint: "Copied work" },
+    { q: "Technical language of a specific field:", o: ["Jargon", "Slang", "Dialect", "Accent"], a: 0, hint: "Expert terms" },
+    { q: "Select: 'A peer-reviewed ___.'", o: ["journal", "blog", "tweet", "post"], a: 0, hint: "Academic publication" },
+    { q: "Transition word for comparison:", o: ["Similarly", "However", "Therefore", "Finally"], a: 0, hint: "Showing likeness" },
+    { q: "Select: 'In ___.' (en resumen)", o: ["conclusion", "beginning", "middle", "order"], a: 0, hint: "Ending words" },
+    { q: "Small note at the bottom of a page:", o: ["Footnote", "Header", "Margin", "Logo"], a: 0, hint: "Extra info" },
+    { q: "Select: 'The ___ review.' (bibliográfica)", o: ["literature", "book", "movie", "paper"], a: 0, hint: "State of the art" },
+    { q: "Style of writing intended to inform:", o: ["Expository", "Narrative", "Creative", "Poetic"], a: 0, hint: "Fact-based" },
+    { q: "Select: 'Supporting ___.' (evidencia)", o: ["evidence", "opinion", "guess", "rumor"], a: 0, hint: "Proof" },
+    { q: "Way to list sources at the end:", o: ["Bibliography", "Biography", "Geography", "History"], a: 0, hint: "References" },
+    { q: "Select: 'A coherent ___.' (argumento)", o: ["argument", "talk", "story", "joke"], a: 0, hint: "Logical flow" },
+    { q: "Using logic to persuade:", o: ["Logos", "Pathos", "Ethos", "Mythos"], a: 0, hint: "Reasoning" }
+];
+

@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css?v=1.1">
+    <link rel="stylesheet" href="styles/style.css?v=1.6">
 </head>
 <body>
     <div id="app">
@@ -23,6 +23,71 @@
                     <div class="loading-bar"></div>
                 </div>
                 <p class="loading-text">Preparando tu aventura...</p>
+            </div>
+        </div>
+
+        <!-- Role Selection Screen -->
+        <div id="role-selection-screen" class="screen">
+            <div class="activation-content">
+                <div class="activation-logo">
+                    <div class="logo-icon">🌍</div>
+                    <h1 class="logo-text">Lingua<span>Quest</span></h1>
+                    <p class="logo-badge">Edición Educativa</p>
+                </div>
+                <div class="role-cards-container">
+                    <button class="role-card" onclick="App.selectRole('teacher')">
+                        <div class="role-icon">👨‍🏫</div>
+                        <div class="role-name">Soy Profesor</div>
+                        <div class="role-desc">Gestiona tus clases y genera códigos</div>
+                    </button>
+                    <button class="role-card" onclick="App.selectRole('student')">
+                        <div class="role-icon">🎓</div>
+                        <div class="role-name">Soy Estudiante</div>
+                        <div class="role-desc">Ingresa con el código de tu clase</div>
+                    </button>
+                </div>
+                <div class="activation-footer">
+                    <p>¿Necesitas una licencia? Contacta vía WhatsApp:</p>
+                    <a href="https://wa.me/51944315149" target="_blank" class="whatsapp-contact">
+                        <span class="whatsapp-icon">📱</span> +51 944 315 149
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher Auth Screen -->
+        <div id="teacher-auth-screen" class="screen">
+            <div class="activation-content">
+                <button class="back-btn-float" onclick="App.navigate('role-selection')">⬅️</button>
+                <div class="activation-logo">
+                    <div class="logo-icon">🔐</div>
+                    <h2>Panel del Docente</h2>
+                </div>
+                <div class="activation-card">
+                    <p>Ingresa tu llave de docente</p>
+                    <div class="activation-form">
+                        <input type="text" id="teacher-key-input" placeholder="Clave de docente" maxlength="30">
+                        <button class="activation-btn" onclick="App.verifyTeacherLicense()">Acceder como Docente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Auth Screen -->
+        <div id="student-auth-screen" class="screen">
+            <div class="activation-content">
+                <button class="back-btn-float" onclick="App.navigate('role-selection')">⬅️</button>
+                <div class="activation-logo">
+                    <div class="logo-icon">🔑</div>
+                    <h2>Acceso Estudiante</h2>
+                </div>
+                <div class="activation-card">
+                    <p>Ingresa el código que te dio tu profesor.</p>
+                    <div class="activation-form">
+                        <input type="text" id="student-code-input" placeholder="ABC-123" maxlength="10">
+                        <button class="activation-btn student-btn" onclick="App.verifyStudentCode()">Entrar a Clase</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -45,10 +110,6 @@
                     <div class="stat-badge level-badge" title="Nivel">
                         <span class="stat-icon">⭐</span>
                         <span id="home-level">1</span>
-                    </div>
-                    <div class="stat-badge lives-badge" title="Vidas">
-                        <span class="stat-icon">❤️</span>
-                        <span id="home-lives">3</span>
                     </div>
                 </div>
             </div>
@@ -87,14 +148,6 @@
                         <div class="menu-btn-text">
                             <span class="btn-title">Logros</span>
                             <span class="btn-desc">Desbloquea recompensas</span>
-                        </div>
-                        <div class="menu-btn-arrow">→</div>
-                    </button>
-                    <button class="menu-btn" onclick="App.navigate('ranking')">
-                        <div class="menu-btn-icon">🏅</div>
-                        <div class="menu-btn-text">
-                            <span class="btn-title">Ranking</span>
-                            <span class="btn-desc">Compite con otros</span>
                         </div>
                         <div class="menu-btn-arrow">→</div>
                     </button>
@@ -222,31 +275,30 @@
                 <div class="quiz-progress-bar-container">
                     <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
                 </div>
-                <div class="quiz-lives" id="quiz-lives">
-                    <span>❤️</span><span>❤️</span><span>❤️</span>
-                </div>
             </div>
             <div class="quiz-content">
-                <div class="quiz-info-bar">
-                    <div class="quiz-question-number" id="quiz-question-number">1 / 10</div>
-                    <div class="quiz-score" id="quiz-score">⭐ 0</div>
-                    <div class="quiz-xp" id="quiz-xp">⚡ 0 XP</div>
-                </div>
-                <div class="timer-container">
-                    <div class="timer-circle" id="timer-circle">
-                        <svg viewBox="0 0 100 100">
-                            <circle class="timer-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="timer-progress" id="timer-progress" cx="50" cy="50" r="45"></circle>
-                        </svg>
-                        <span class="timer-text" id="timer-text">15</span>
+                <div id="quiz-question-container-inner">
+                    <div class="quiz-stats-top">
+                        <div class="quiz-score" id="quiz-score">⭐ 0</div>
+                        <div id="quiz-question-number" style="font-weight: 800; font-size: 14px;">1 / 15</div>
+                        <div class="quiz-xp" id="quiz-xp">⚡ 0 XP</div>
                     </div>
-                </div>
-                <div class="quiz-question-container">
-                    <div class="question-category" id="question-category">Gramática</div>
-                    <h2 class="question-text" id="question-text">Loading question...</h2>
-                </div>
-                <div class="quiz-options" id="quiz-options">
-                    <!-- Options generated by JS -->
+                    <div class="timer-container">
+                        <div class="timer-circle" id="timer-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="timer-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="timer-progress" id="timer-progress" cx="50" cy="50" r="45"></circle>
+                            </svg>
+                            <span class="timer-text" id="timer-text">15</span>
+                        </div>
+                    </div>
+                    <div class="quiz-question-container">
+                        <div class="question-category" id="question-category">Gramática</div>
+                        <h2 class="question-text" id="question-text">Loading question...</h2>
+                    </div>
+                    <div class="quiz-options" id="quiz-options">
+                        <!-- Options generated by JS -->
+                    </div>
                 </div>
                 <div class="quiz-feedback" id="quiz-feedback">
                     <div class="feedback-icon" id="feedback-icon">✅</div>
@@ -259,55 +311,30 @@
 
         <!-- Results Screen -->
         <div id="results-screen" class="screen">
-            <div class="results-content">
-                <div class="results-header-section">
-                    <div class="results-emoji" id="results-emoji">🎉</div>
-                    <h1 class="results-title" id="results-title">¡Excelente!</h1>
-                    <p class="results-subtitle" id="results-subtitle">Has completado el quiz</p>
-                </div>
-                <div class="results-score-circle">
-                    <div class="score-circle">
-                        <svg viewBox="0 0 120 120">
-                            <circle class="score-bg" cx="60" cy="60" r="54"></circle>
-                            <circle class="score-progress" id="results-score-circle" cx="60" cy="60" r="54"></circle>
-                        </svg>
-                        <div class="score-center">
-                            <span class="score-percent" id="results-percent">0%</span>
-                        </div>
-                    </div>
+            <div class="screen-content results-content">
+                <div class="results-header">
+                    <div class="results-icon" id="results-main-icon">🏆</div>
+                    <h2 id="results-title">¡Quiz Completado!</h2>
+                    <p id="results-subtitle">Has hecho un gran trabajo practicando.</p>
                 </div>
                 <div class="results-stats">
-                    <div class="result-stat">
-                        <span class="result-stat-icon">✅</span>
-                        <span class="result-stat-value" id="results-correct">0</span>
-                        <span class="result-stat-label">Correctas</span>
+                    <div class="res-stat-card">
+                        <div class="res-stat-val" id="results-score">0</div>
+                        <div class="res-stat-label">Puntaje</div>
                     </div>
-                    <div class="result-stat">
-                        <span class="result-stat-icon">❌</span>
-                        <span class="result-stat-value" id="results-incorrect">0</span>
-                        <span class="result-stat-label">Incorrectas</span>
+                    <div class="res-stat-card">
+                        <div class="res-stat-val" id="results-accuracy">0%</div>
+                        <div class="res-stat-label">Precisión</div>
                     </div>
-                    <div class="result-stat">
-                        <span class="result-stat-icon">⭐</span>
-                        <span class="result-stat-value" id="results-score">0</span>
-                        <span class="result-stat-label">Puntos</span>
-                    </div>
-                    <div class="result-stat">
-                        <span class="result-stat-icon">⚡</span>
-                        <span class="result-stat-value" id="results-xp">0</span>
-                        <span class="result-stat-label">XP</span>
+                    <div class="res-stat-card highlight">
+                        <div class="res-stat-val" id="results-xp">0</div>
+                        <div class="res-stat-label">XP Ganada</div>
                     </div>
                 </div>
-                <div class="results-achievements" id="results-achievements">
-                    <!-- Unlocked achievements shown here -->
-                </div>
-                <div class="results-unlock" id="results-unlock" style="display:none">
-                    <div class="unlock-icon">🔓</div>
-                    <p id="results-unlock-text">¡Nuevo curso desbloqueado!</p>
-                </div>
-                <div class="results-buttons">
-                    <button class="results-btn primary" onclick="App.navigate('level-select')">Seguir Aprendiendo</button>
-                    <button class="results-btn secondary" onclick="App.navigate('home')">Menú Principal</button>
+                <div class="results-actions">
+                    <button id="results-rematch-btn" class="results-btn rematch-btn" onclick="App.rematchQuiz()">🔄 Revancha</button>
+                    <button class="results-btn primary" onclick="App.navigate('home')">Continuar</button>
+                    <button class="results-btn secondary" onclick="App.navigate('level-select')">Otro curso</button>
                 </div>
             </div>
         </div>
@@ -329,24 +356,6 @@
             </div>
         </div>
 
-        <!-- Ranking Screen -->
-        <div id="ranking-screen" class="screen">
-            <div class="screen-header">
-                <button class="back-btn" onclick="App.navigate('home')">←</button>
-                <h2>Ranking</h2>
-                <div class="header-spacer"></div>
-            </div>
-            <div class="screen-content">
-                <div class="ranking-tabs">
-                    <button class="ranking-tab active" onclick="Ranking.switchTab('xp', this)">XP</button>
-                    <button class="ranking-tab" onclick="Ranking.switchTab('score', this)">Puntos</button>
-                    <button class="ranking-tab" onclick="Ranking.switchTab('level', this)">Nivel</button>
-                </div>
-                <div class="ranking-list" id="ranking-list">
-                    <!-- Ranking generated by JS -->
-                </div>
-            </div>
-        </div>
 
         <!-- Settings Screen -->
         <div id="settings-screen" class="screen">
@@ -400,6 +409,24 @@
                         </label>
                     </div>
                 </div>
+                <div class="settings-group" id="teacher-panel-link" style="display:none;">
+                    <h3>Gestión</h3>
+                    <button class="menu-btn" onclick="App.showTeacherDashboard()">
+                        <div class="menu-btn-icon">📋</div>
+                        <div class="menu-btn-text">Generar Código de Acceso</div>
+                    </button>
+                </div>
+                <div class="settings-group">
+                    <h3>Licencia</h3>
+                    <div class="setting-item">
+                        <label>Estado</label>
+                        <span id="setting-license-status" class="status-badge">Activado ✅</span>
+                    </div>
+                    <div class="setting-item">
+                        <label>Clave</label>
+                        <span id="setting-license-key" class="key-display">XXXX-XXXX-XXXX</span>
+                    </div>
+                </div>
                 <div class="settings-group">
                     <h3>Datos</h3>
                     <button class="settings-danger-btn" onclick="App.resetProgress()">🗑️ Resetear Progreso</button>
@@ -433,11 +460,6 @@
                         <p>Tienes 15 segundos para cada pregunta. ¡Responde rápido para obtener puntos bonus!</p>
                     </div>
                     <div class="instruction-card">
-                        <div class="instruction-icon">❤️</div>
-                        <h3>Vidas</h3>
-                        <p>Tienes 3 vidas por quiz. Si respondes mal, pierdes una vida. Si se acaban, el quiz termina.</p>
-                    </div>
-                    <div class="instruction-card">
                         <div class="instruction-icon">⚡</div>
                         <h3>XP y Puntos</h3>
                         <p>Gana 10 XP y 10 puntos por respuesta correcta. Bonus de 5 si respondes en menos de 5 segundos. 100 XP al completar un curso.</p>
@@ -454,7 +476,6 @@
                     </div>
                     <div class="instruction-card">
                         <div class="instruction-icon">🏅</div>
-                        <h3>Ranking</h3>
                         <p>Compite con otros jugadores y escala posiciones en el ranking global.</p>
                     </div>
                 </div>
@@ -506,26 +527,47 @@
                 <button class="modal-btn confirm name-confirm-btn" onclick="App.setPlayerName()">¡Comenzar Aventura!</button>
             </div>
         </div>
+        <!-- Teacher Dashboard Modal -->
+        <div id="teacher-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header-simple">
+                    <h2>Panel de Control</h2>
+                    <button class="close-modal-x" onclick="App.closeTeacherDashboard()">&times;</button>
+                </div>
+                <div class="teacher-dashboard">
+                    <div class="code-generator-box">
+                        <p>Genera un código temporal para tus alumnos:</p>
+                        <div id="generated-code-display" class="big-code">---</div>
+                        <button class="activation-btn" onclick="App.generateNewStudentCode()">Generar Nuevo Código</button>
+                    </div>
+                    <div class="license-info-box">
+                        <div class="mini-stat">
+                            <span class="label">Dispositivos:</span>
+                            <span id="teacher-devices-count">0/0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
-    <script src="js/questions.js?v=1.1"></script>
-    <script src="js/questions_intermediate_extra.js?v=1.1"></script>
-    <script src="js/questions_advanced_extra.js?v=1.1"></script>
-    <script src="js/timer.js?v=1.1"></script>
-    <script src="js/soundSystem.js?v=1.1"></script>
-    <script src="js/scoreSystem.js?v=1.1"></script>
-    <script src="js/xpSystem.js?v=1.1"></script>
-    <script src="js/achievements.js?v=1.1"></script>
-    <script src="js/ranking.js?v=1.1"></script>
-    <script src="js/progress.js?v=1.1"></script>
-    <script src="js/quizEngine.js?v=1.1"></script>
-    <script src="js/app.js?v=1.1"></script>
+    <script src="js/questions.js?v=1.2"></script>
+    <script src="js/questions_intermediate_extra.js?v=1.2"></script>
+    <script src="js/questions_advanced_extra.js?v=1.2"></script>
+    <script src="js/timer.js?v=1.2"></script>
+    <script src="js/soundSystem.js?v=1.2"></script>
+    <script src="js/scoreSystem.js?v=1.2"></script>
+    <script src="js/xpSystem.js?v=1.2"></script>
+    <script src="js/achievements.js?v=1.2"></script>
+    <script src="js/progress.js?v=1.2"></script>
+    <script src="js/quizEngine.js?v=1.2"></script>
+    <script src="js/app.js?v=1.2"></script>
 
     <!-- Firebase SDK (ES Module) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getFirestore, collection, doc, setDoc, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { getFirestore, collection, doc, setDoc, getDoc, getDocs, updateDoc, arrayUnion, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         
         const firebaseConfig = {
             apiKey: "AIzaSyBShgh_avRyFgO5eqRi4-k3Lwp2HnRYKX8",
@@ -540,13 +582,15 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         
-        // Expose to global scope for Ranking System
         window.FirebaseDB = {
             db,
             collection,
             doc,
             setDoc,
+            getDoc,
             getDocs,
+            updateDoc,
+            arrayUnion,
             query,
             orderBy,
             limit
