@@ -29,6 +29,12 @@ const XPSystem = {
         const oldLevel = this.getLevel();
         this.currentXP += amount;
         this.sessionXP += amount;
+        
+        // Sync with Progress
+        if (typeof Progress !== 'undefined') {
+            Progress.addXP(amount);
+        }
+        
         const newLevel = this.getLevel();
         this.updateDisplay();
         if (newLevel > oldLevel) return newLevel;

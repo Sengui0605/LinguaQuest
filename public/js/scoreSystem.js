@@ -17,12 +17,24 @@ const ScoreSystem = {
         let points = this.correctPoints;
         if (isQuick) points += this.speedBonus;
         this.currentScore += points;
+        
+        // Sync with Progress
+        if (typeof Progress !== 'undefined') {
+            Progress.addScore(points);
+        }
+        
         this.updateDisplay();
         return points;
     },
 
     addCompletion() {
         this.currentScore += this.completionBonus;
+        
+        // Sync with Progress
+        if (typeof Progress !== 'undefined') {
+            Progress.addScore(this.completionBonus);
+        }
+        
         this.updateDisplay();
         return this.completionBonus;
     },

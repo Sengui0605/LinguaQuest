@@ -1,0 +1,1552 @@
+
+/* ============================================================
+   LinguaQuest — Feature Additions
+   Dark/Light mode · Adventure Map · Animations · Results Chart
+   ============================================================ */
+
+/* ── LIGHT THEME ── */
+[data-theme="light"] {
+  --bg: #f7f7f7;
+  --bg-card: rgba(255,255,255,0.92);
+  --bg-card-hover: rgba(245,248,255,0.98);
+  --bg-elevated: rgba(235,240,250,0.95);
+  --text: #1a1a2e;
+  --text-secondary: #3a3a5c;
+  --text-muted: #6b6b8a;
+  --border: rgba(0,0,0,0.1);
+  --border-light: rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] body::before {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(88,204,2,0.06) 0%, transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(28,176,246,0.06) 0%, transparent 40%);
+}
+
+[data-theme="light"] .screen,
+[data-theme="light"] #app { background: var(--bg); }
+
+[data-theme="light"] .home-header,
+[data-theme="light"] .screen-header { background: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(0,0,0,0.08); }
+
+[data-theme="light"] .menu-btn,
+[data-theme="light"] .course-card,
+[data-theme="light"] .level-card { background: rgba(255,255,255,0.9); border-color: rgba(0,0,0,0.1); }
+
+[data-theme="light"] .stat-badge { background: rgba(0,0,0,0.06); }
+
+[data-theme="light"] .option-btn { background: rgba(255,255,255,0.9); border-color: rgba(0,0,0,0.12); color: var(--text); }
+
+[data-theme="light"] .quiz-feedback { background: rgba(255,255,255,0.98); }
+
+/* ── DARK MODE TOGGLE ── */
+.theme-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+.theme-toggle-btn:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+
+/* ── ADVENTURE MAP — BUG FIXES ── */
+
+/* Fix 1: Prevent the courses-container grid override from breaking the map */
+#courses-container.has-adventure-map {
+  display: block !important;
+  grid-template-columns: none !important;
+  gap: 0 !important;
+  padding: 0 !important;
+}
+
+/* Fix 2: Reset text-align forced by screen.active so labels align correctly */
+.adventure-map-container,
+.adventure-map-container * {
+  text-align: left;
+}
+.map-node-label {
+  text-align: center;
+}
+
+/* Fix 3: Increase row height to avoid label → next-node collision */
+.map-row {
+  height: 110px;  /* was 90px — needs room for node (68px) + label (14px) + gap (10px) */
+  overflow: visible;
+}
+
+/* Fix 4: Ensure nodes layer doesn't clip labels */
+.map-nodes-layer {
+  overflow: visible;
+}
+
+/* Fix 5: adventure-map-container needs defined position context for SVG */
+.adventure-map-container {
+  position: relative;
+  overflow: visible;  /* allow labels to breathe at the bottom */
+  padding-bottom: 24px; /* extra space for last row label */
+}
+
+/* Fix 6: SVG needs to stretch to actual content height — set via JS */
+.map-svg-paths {
+  pointer-events: none;
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* height is set explicitly by JS after layout */
+  overflow: visible;
+}
+
+/* Fix 7: On desktop, ensure the map row left/right margins are symmetrical */
+@media (min-width: 768px) {
+  .map-row.left  { padding-left: 15%; }
+  .map-row.right { padding-right: 15%; }
+}
+
+/* Fix 8: course-select screen — ensure content doesn't center-restrict the map */
+#course-select-screen .screen-content {
+  padding-left: 0;
+  padding-right: 0;
+}
+#course-select-screen .screen-content > .courses-container {
+  width: 100%;
+}
+
+
+.map-node {
+  width: 68px; height: 68px;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  border: 3px solid transparent;
+  background: var(--bg-card);
+}
+
+.map-node-icon {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.map-node-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  max-width: 90px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Completed node */
+.map-node.completed {
+  background: linear-gradient(135deg, #58cc02, #46a302);
+  border-color: #46a302;
+  box-shadow: 0 4px 20px rgba(88,204,2,0.4);
+}
+.map-node.completed .map-node-icon { filter: none; }
+.map-node.completed:hover { transform: scale(1.1); }
+
+/* Star badge on completed */
+.map-node.completed::after {
+  content: '⭐';
+  position: absolute;
+  top: -10px; right: -8px;
+  font-size: 16px;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+}
+
+/* Available (next) node */
+.map-node.available {
+  background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 0 rgba(28,176,246,0.5);
+  animation: mapPulse 2s ease-in-out infinite;
+}
+.map-node.available:hover { transform: scale(1.12); }
+
+@keyframes mapPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(28,176,246,0.5); }
+  50%      { box-shadow: 0 0 0 10px rgba(28,176,246,0); }
+}
+
+/* Locked node */
+.map-node.locked {
+  background: var(--bg-elevated);
+  border-color: var(--border);
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.7);
+}
+.map-node.locked::before {
+  content: '🔒';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 22px;
+  z-index: 2;
+}
+.map-node.locked .map-node-icon { opacity: 0.3; }
+
+/* Path lines between nodes */
+.map-path-line {
+  stroke: var(--border);
+  stroke-width: 4;
+  stroke-dasharray: 8 5;
+  fill: none;
+  transition: stroke 0.3s;
+}
+.map-path-line.done {
+  stroke: var(--primary);
+  stroke-dasharray: none;
+  stroke-width: 5;
+}
+
+/* Connector dots on map */
+.map-connector {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 30%;
+  top: 85px;
+  z-index: 0;
+}
+.map-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  flex-shrink: 0;
+}
+.map-dot.done { background: var(--primary); }
+
+/* ── CONFETTI CANVAS ── */
+#confetti-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ── XP FLOAT ANIMATION ── */
+.xp-float {
+  position: fixed;
+  font-size: 18px;
+  font-weight: 900;
+  color: #ffd700;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  pointer-events: none;
+  z-index: 9997;
+  animation: xpRise 1.1s ease-out forwards;
+  white-space: nowrap;
+}
+@keyframes xpRise {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  60%  { opacity: 1; transform: translateY(-50px) scale(1.2); }
+  100% { opacity: 0; transform: translateY(-90px) scale(0.9); }
+}
+
+/* ── COMBO DISPLAY ── */
+.combo-banner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%) scale(0);
+  background: linear-gradient(135deg, #ff9600, #ff6b00);
+  color: white;
+  font-size: 28px;
+  font-weight: 900;
+  padding: 16px 32px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(255,150,0,0.5);
+  pointer-events: none;
+  z-index: 9000;
+  text-align: center;
+  letter-spacing: 2px;
+  opacity: 0;
+}
+.combo-banner.show {
+  animation: comboPop 1.4s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+@keyframes comboPop {
+  0%   { transform: translate(-50%,-50%) scale(0);   opacity: 0; }
+  15%  { transform: translate(-50%,-50%) scale(1.15); opacity: 1; }
+  30%  { transform: translate(-50%,-50%) scale(1);    opacity: 1; }
+  70%  { transform: translate(-50%,-50%) scale(1);    opacity: 1; }
+  100% { transform: translate(-50%,-50%) scale(0.8);  opacity: 0; }
+}
+
+/* ── SHAKE ANIMATION ── */
+.shake {
+  animation: shakeAnim 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes shakeAnim {
+  0%,100% { transform: translateX(0); }
+  10%,50%,90% { transform: translateX(-8px); }
+  30%,70% { transform: translateX(8px); }
+}
+
+/* ── RESULTS SCREEN ENHANCEMENTS ── */
+.results-chart-section {
+  width: 100%;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.results-chart-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.results-type-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 9px;
+}
+
+.results-type-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  width: 110px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.results-bar-track {
+  flex: 1;
+  height: 10px;
+  background: var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.results-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  background: var(--primary);
+  transition: width 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.results-bar-fill.partial { background: var(--warning); }
+.results-bar-fill.empty   { background: var(--danger);  }
+
+.results-bar-pct {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 36px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.results-failed-section {
+  width: 100%;
+  margin: 16px 0 0;
+  text-align: left;
+}
+
+.results-failed-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s;
+}
+.results-failed-toggle:hover { border-color: var(--secondary); color: var(--secondary); }
+.results-failed-toggle .arrow { transition: transform 0.2s; }
+.results-failed-toggle.open .arrow { transform: rotate(180deg); }
+
+.results-failed-list {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.results-failed-list.visible { display: flex; }
+
+.results-failed-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--danger);
+  border-radius: var(--radius-xs);
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 13px;
+}
+
+.results-failed-q {
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.results-failed-answer {
+  color: var(--primary);
+  font-size: 12px;
+}
+
+.results-previous-compare {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.results-compare-icon { font-size: 18px; }
+.results-compare-text { flex: 1; }
+.results-compare-delta { font-weight: 700; }
+.results-compare-delta.up   { color: var(--primary); }
+.results-compare-delta.down { color: var(--danger);  }
+.results-compare-delta.same { color: var(--text-muted); }
+
+/* ── TEACHER DASHBOARD ENHANCEMENTS ── */
+.teacher-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.teacher-tabs::-webkit-scrollbar { display: none; }
+
+.teacher-tab {
+  flex: 1;
+  min-width: 80px;
+  padding: 8px 12px;
+  border-radius: var(--radius-xs);
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.teacher-tab.active {
+  background: var(--primary);
+  color: white;
+}
+.teacher-tab:hover:not(.active) { color: var(--text); background: var(--bg-card); }
+
+.teacher-tab-panel { display: none; }
+.teacher-tab-panel.active { display: block; }
+
+.teacher-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: border-color 0.2s;
+}
+.teacher-stat-card:hover { border-color: var(--primary); }
+.teacher-stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+.teacher-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+#teacher-overview-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+@media (min-width: 600px) {
+  #teacher-overview-stats { grid-template-columns: repeat(3, 1fr); }
+}
+
+.teacher-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 16px 0 8px;
+}
+
+.teacher-alert-card {
+  background: rgba(255,75,75,0.1);
+  border: 1px solid rgba(255,75,75,0.3);
+  border-radius: var(--radius-xs);
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.teacher-student-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 8px;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  font-size: 13px;
+}
+.teacher-student-row:hover { border-color: var(--primary); }
+.teacher-student-name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.teacher-student-progress-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.teacher-student-progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+
+.teacher-code-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.teacher-code-box p { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+.big-code {
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: 8px;
+  color: var(--primary);
+  font-family: 'JetBrains Mono', monospace, sans-serif;
+  margin: 12px 0;
+  text-shadow: 0 0 20px rgba(88,204,2,0.3);
+}
+
+.teacher-assignment-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.teacher-comment-section {
+  margin: 16px 0;
+}
+.teacher-comment-section label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 6px;
+}
+.teacher-comment-section textarea {
+  width: 100%;
+  min-height: 80px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  color: var(--text);
+  padding: 10px;
+  font-size: 13px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+#teacher-student-detail { display: none; }
+
+.teacher-assign-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.teacher-assign-form label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.teacher-assign-form input,
+.teacher-assign-form select {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  color: var(--text);
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.teacher-devices-info {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 8px;
+}
+
+.teacher-export-btn {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.teacher-export-btn:hover { border-color: var(--secondary); color: var(--secondary); }
+
+.analytics-section { margin-top: 16px; }
+.analytics-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.analytics-no-data {
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: center;
+  padding: 20px;
+}
+
+/* ── ENHANCED XP POPUP ── */
+.xp-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: linear-gradient(135deg, var(--warning), var(--accent));
+  color: white;
+  font-size: 22px;
+  font-weight: 900;
+  padding: 12px 24px;
+  border-radius: 50px;
+  pointer-events: none;
+  z-index: 9001;
+  box-shadow: 0 4px 20px rgba(255,150,0,0.4);
+  opacity: 0;
+}
+.xp-popup.show {
+  animation: xpPopAnim 1.2s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+@keyframes xpPopAnim {
+  0%   { transform: translate(-50%,-50%) scale(0); opacity: 0; }
+  20%  { transform: translate(-50%,-60%) scale(1.1); opacity: 1; }
+  60%  { transform: translate(-50%,-70%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%,-90%) scale(0.8); opacity: 0; }
+}
+
+/* ── STREAK FIRE EFFECT ON HIGH COMBO ── */
+.quiz-streak.on-fire {
+  animation: streakFire 0.4s ease-in-out infinite alternate;
+}
+@keyframes streakFire {
+  from { color: var(--warning); text-shadow: 0 0 6px var(--warning); }
+  to   { color: #ff4500;        text-shadow: 0 0 14px #ff4500; }
+}
+
+/* ── CORRECT FLASH ── */
+@keyframes correctFlash {
+  0%,100% { background: var(--bg); }
+  50%      { background: rgba(88,204,2,0.08); }
+}
+.correct-flash { animation: correctFlash 0.4s ease; }
+
+/* ── WRONG FLASH ── */
+@keyframes wrongFlash {
+  0%,100% { background: var(--bg); }
+  50%      { background: rgba(255,75,75,0.08); }
+}
+.wrong-flash { animation: wrongFlash 0.4s ease; }
+
+/* ── TEACHER CODE BOX FIXES ── */
+
+/* Override duplicate big-code style from style.css (no glow on placeholder) */
+.big-code {
+  display: block;
+  text-align: center;
+  min-height: 60px;
+  line-height: 1.2;
+  word-break: break-all;
+  transition: all 0.3s ease;
+}
+
+/* Placeholder state: smaller, muted, no monospace oddness */
+.big-code.is-placeholder {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px !important;
+  color: var(--text-muted) !important;
+  font-family: inherit !important;
+  text-shadow: none !important;
+  border-style: dashed !important;
+  border-color: var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 18px 16px !important;
+  font-style: italic;
+  min-height: auto;
+}
+
+/* Real code state: big, bold, green, impressive */
+.big-code:not(.is-placeholder) {
+  font-size: 40px !important;
+  letter-spacing: 10px !important;
+  color: var(--primary) !important;
+  text-shadow: 0 0 24px rgba(88,204,2,0.35) !important;
+  border: 1px solid rgba(88,204,2,0.25) !important;
+  background: rgba(88,204,2,0.04) !important;
+  padding: 16px !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+/* ── MAP PATH STROKE WIDTH ── */
+/* Thinner paths look cleaner on the adventure map */
+.map-path-line {
+  stroke-width: 3;
+}
+.map-path-line.done {
+  stroke-width: 4;
+}
+
+/* ════════════════════════════════════════════════
+   VISUAL AUDIT FIX — comprehensive layout fixes
+   ════════════════════════════════════════════════ */
+
+/* ── 1. GLOBAL: Override .screen.active forced centering for content-heavy screens ── */
+/* The base style.css sets text-align:center !important on .screen.active,
+   which cascades into teacher dashboard, results charts, and other left-aligned content. */
+
+#teacher-dashboard-screen.screen.active,
+#results-screen.screen.active,
+#course-select-screen.screen.active,
+#settings-screen.screen.active,
+#profile-screen.screen.active,
+#achievements-screen.screen.active,
+#instructions-screen.screen.active,
+#assignments-screen.screen.active,
+#analytics-screen.screen.active {
+  text-align: center !important; /* keep screen-level centering */
+}
+
+/* But inner content wrappers should be left-aligned for readability */
+#teacher-dashboard-screen .screen-content,
+#results-screen .results-content,
+#settings-screen .screen-content,
+#instructions-screen .screen-content {
+  text-align: left;
+}
+
+/* ── 2. RESULTS SCREEN: wider content area + properly sized buttons ── */
+#results-screen .results-content {
+  max-width: 600px !important;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Center the results header (icon, title, subtitle) */
+.results-header {
+  text-align: center;
+  margin-bottom: 24px;
+  animation: bounceIn 0.5s ease;
+}
+.results-header .results-icon {
+  font-size: 64px;
+  margin-bottom: 12px;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Results stat cards: keep centered */
+.results-stats {
+  text-align: center;
+}
+
+/* Results buttons: full-width stack on mobile, row on desktop */
+.results-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+.results-buttons .results-btn {
+  max-width: none !important;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 500px) {
+  .results-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .results-buttons .results-btn {
+    flex: 1;
+    max-width: 220px !important;
+  }
+}
+
+/* ── 3. TEACHER DASHBOARD: left-aligned content ── */
+#teacher-dashboard-screen .screen-content {
+  text-align: left;
+  max-width: 900px !important;
+  padding: 20px !important;
+}
+
+/* Teacher code-box: keep centered */
+.teacher-code-box {
+  text-align: center;
+}
+
+/* Teacher form inputs shouldn't be text-align:center */
+.teacher-assign-form,
+.teacher-assign-form label,
+.teacher-assign-form input,
+.teacher-assign-form select {
+  text-align: left;
+}
+
+/* Teacher tabs should wrap nicely */
+.teacher-tabs {
+  justify-content: center;
+}
+
+/* ── 4. ADVENTURE MAP: override desktop grid + padding overrides ── */
+/* The desktop media query forces .courses-container into grid — this override is critical */
+@media (min-width: 768px) {
+  #courses-container.has-adventure-map {
+    display: block !important;
+    grid-template-columns: none !important;
+    gap: 0 !important;
+  }
+
+  #course-select-screen .screen-content {
+    padding: 16px !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ── 5. BACK-BTN-FLOAT: ensure it displays and center its content ── */
+.back-btn-float {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--text);
+  transition: all 0.2s;
+}
+.back-btn-float:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--primary);
+  transform: scale(1.1);
+}
+
+/* ── 6. THEME TOGGLE: prevent it from covering content ── */
+.theme-toggle-btn {
+  z-index: 9999;
+}
+@media (max-width: 480px) {
+  .theme-toggle-btn {
+    bottom: 14px;
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+/* ── 7. ROLE SELECTION CENTERING ── */
+#role-selection-screen.screen.active {
+  justify-content: center !important;
+}
+#role-selection-screen .activation-content {
+  text-align: center;
+  align-items: center;
+}
+
+/* ── 8. TEACHER & STUDENT AUTH: centering fix ── */
+#teacher-auth-screen.screen.active,
+#student-auth-screen.screen.active {
+  justify-content: center !important;
+}
+#teacher-auth-screen .activation-content,
+#student-auth-screen .activation-content {
+  text-align: center;
+  position: relative;
+}
+
+/* ── 9. QUIZ SCREEN: ensure options center and don't collide ── */
+.quiz-content {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── 10. RESULTS: chart and failed sections should be left-aligned ── */
+.results-chart-section,
+.results-failed-section {
+  text-align: left;
+}
+
+/* ── 11. HOME SCREEN: ensure home-content centers on desktop ── */
+#home-screen .home-content {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── 12. PROFILE: center stats but left-align achievements ── */
+.profile-stats-grid {
+  text-align: center;
+}
+.profile-recent-achievements {
+  text-align: left;
+}
+
+/* ── 13. SETTINGS: left-align all form elements ── */
+#settings-screen .settings-group {
+  text-align: left;
+}
+#settings-screen .settings-group h3 {
+  text-align: left;
+}
+
+/* ── 14. TOAST: ensure toast isn't clipped ── */
+.toast {
+  max-width: calc(100vw - 40px);
+}
+
+/* ── 15. RESULTS COMPARE: centered ── */
+.results-previous-compare {
+  text-align: left;
+}
+
+/* ── 16. MATCHING ITEMS: ensure they center within quiz ── */
+.quiz-matching-container {
+  max-width: 600px;
+  margin: 20px auto 0;
+}
+
+/* ── 17. MENU BUTTONS (Home & Options): Prevent text overflow and keep layout clean ── */
+.menu-btn-text, .option-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-title, .btn-desc {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+/* ── 18. ROLE SELECTION CARDS: Make sure they have a nice max-width and center properly ── */
+.role-cards-container {
+  align-items: center;
+}
+.role-card {
+  width: 100%;
+  max-width: 320px;
+}
+
+/* ── 19. ACTIVATION BUTTONS: Ensure they are fully visible and don't overflow ── */
+.activation-btn, .settings-save-btn, .settings-danger-btn, .name-confirm-btn {
+  white-space: normal; /* Let the text wrap naturally if needed */
+  height: auto;
+  min-height: 50px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── 20. LEVEL INFO: Fix text clipping on level cards ── */
+.level-info {
+  min-width: 0; /* allows flex children to shrink below their implied minimum size */
+}
+.level-name, .level-description {
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* max 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── 21. BACK BTN: Ensure standard back btn fits well ── */
+.back-btn {
+  flex-shrink: 0;
+}
+
+/* ── 22. SETTINGS SCREEN: Fix toggle switch alignment ── */
+.toggle-setting {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* ── 23. QUIZ HEADER: Fix progress bar layout ── */
+.quiz-header {
+  gap: 15px; /* give exact, predictable gap */
+}
+.quiz-progress-bar-container {
+  min-width: 100px;
+}
+
+/* ── 24. AVOID COLLISIONS WITH FLOATING BUTTONS ── */
+/* The dark mode toggle and back-float can cover content at the bottom/top.
+   Add padding to the scrolling wrappers so users can scroll past the buttons. */
+.screen-content {
+  padding-bottom: 80px !important;
+}
+
+/* ── 25. SCORE CIRCLE ALIGNMENT ── */
+.results-score-circle {
+  align-items: center;
+}
+.score-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── 26. RESULTS FAILED SECTION: Fix visibility & layout ── */
+.results-failed-toggle {
+  margin-top: 10px;
+  text-align: left; /* Keep left aligned */
+}
+.results-failed-list {
+  text-align: left;
+}
+
+/* ── 27. MODAL OVERLAY: Ensure modals are absolutely centered ── */
+.modal-overlay, .name-modal-content, .levelup-overlay {
+  display: none;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.modal-overlay.show, .levelup-overlay.show {
+  display: flex !important;
+}
+.modal-content, .levelup-content {
+  margin: auto; /* Fallback centering */
+  position: relative;
+}
+
+/* ── 28. FIX THE "INSTRUCTIONS" BULLETS LAYOUT ── */
+.instruction-card {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ── 29. THEORY SECTION: Fix padding and alignment ── */
+#theory-list-container {
+  text-align: left;
+}
+.theory-article {
+  text-align: left;
+}
+
+/* ── 30. ASSIGNMENTS SCREEN: Fix missing list alignment ── */
+#assignments-screen .screen-content {
+  text-align: left;
+}
+
+/* ── 31. FIX COURSE CARDS ON MOBILE (PREVENT COLLISIONS) ── */
+.course-card {
+  flex-wrap: nowrap;
+}
+@media (max-width: 480px) {
+  .course-card {
+    padding: 14px 12px;
+    gap: 10px;
+  }
+  .course-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+}
+
+/* ── 32. FIX QUIZ OPTIONS (Ensure they always fit) ── */
+.option-btn {
+  word-break: break-word; /* Allows long words to break rather than overflow */
+  white-space: normal;
+}
+.option-text {
+  text-overflow: clip; /* We want the text to wrap, not clip */
+  overflow: visible;
+  line-height: 1.3;
+}
+
+/* ── 33. ADVENTURE MAP OVERALL CENTERING ── */
+#levels-container {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center; 
+  width: 100%;
+}
+
+.adventure-map-container {
+  margin: 0 auto; /* Ensures the SVG wrapper is centered horizontally */
+  display: flex;
+  justify-content: center;
+}
+
+/* ── 34. TEACHER DASHBOARD CODE GENERATOR FIX ── */
+.teacher-code-box .activation-btn {
+  max-width: 250px; /* Prevent the button from being too wide */
+  margin: 10px auto; /* Centers the button horizontally */
+  height: auto;
+  min-height: 40px; 
+  padding: 10px 16px; /* Reduced padding from 14px to make it smaller inside */
+  font-size: 14px; /* Reduced from 16px */
+}
+
+/* Make sure the main layout wrapper has max-width and centering */
+.teacher-code-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── 35. TEACHER DASHBOARD CODE ROUNDUP ── */
+/* Make the code generator box smaller and perfectly centered */
+.teacher-code-box {
+  max-width: 500px;
+  margin: 0 auto 24px auto !important; /* Center the box and add bottom margin */
+  width: 100%;
+}
+
+/* Ensure the big code display is appropriately sized */
+.big-code {
+  max-width: 300px;
+  margin: 15px auto !important;
+  font-size: 28px !important; /* Slightly smaller font to fit nicely */
+}
+
+/* ── 36. TEACHER DASHBOARD: hide CSV and limit wrapper size ── */
+.teacher-export-btn {
+  display: none !important;
+}
+
+/* Reducimos aún más el borde oscuro del generador de código para que no se vea tan estirado y "tape" las cosas de debajo */
+.teacher-code-box {
+  max-width: 450px !important;
+  padding: 12px 16px !important;
+  margin-top: 10px !important;
+}
+
+/* El número de dispositivos que ocupa espacio innecesario */
+.teacher-devices-info {
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+/* ── 37. TEACHER TABS SCROLL FIX ── */
+/* Prevent the tabs from causing horizontal overflow which triggers a slide bar.
+   Force them to wrap nicely and prevent them from escaping their container. */
+.teacher-tabs {
+  display: flex;
+  flex-wrap: wrap; /* Allows buttons to go to next line instead of overflowing */
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* Prevent horizontal scrollbar on the tabs container itself */
+}
+
+/* Ensure the screen content wrapper doesn't push width beyond maximum */
+#teacher-dashboard-screen .screen-content {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* ── 38. FIX NAME MODAL VISIBILITY ── */
+/* In rule 27 I accidentally hid the .name-modal-content */
+.name-modal-content {
+  display: block !important;
+}
+/* ══════════════════════════════════════════
+   QUIZ BUILDER STYLES
+══════════════════════════════════════════ */
+
+/* ── List view ── */
+.qb-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.qb-list-desc { color: var(--text-muted); font-size: 13px; }
+
+.qb-quiz-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  transition: border-color .18s;
+}
+.qb-quiz-card:hover { border-color: var(--primary); }
+.qb-quiz-card-body  { flex: 1; min-width: 0; }
+.qb-quiz-title      { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+.qb-quiz-meta       { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; color: var(--text-muted); }
+.qb-quiz-card-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+.qb-badge         { padding: 2px 8px; border-radius: 99px; font-size: 11px; font-weight: 600; background: var(--bg-elevated); color: var(--text-muted); }
+.qb-badge-blue    { background: rgba(28,176,246,0.12); color: var(--secondary); }
+.qb-badge-green   { background: rgba(88,204,2,0.12);  color: var(--primary); }
+.qb-badge-gray    { background: var(--bg-elevated);   color: var(--text-muted); opacity:.7; }
+
+.qb-empty { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+.qb-empty-icon { font-size: 48px; margin-bottom: 12px; }
+.qb-empty p    { font-size: 14px; margin-bottom: 4px; }
+
+/* ── Editor top bar ── */
+.qb-editor-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.qb-publish-toggle {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12.5px; color: var(--text-secondary);
+  cursor: pointer; user-select: none;
+}
+.qb-publish-toggle input { accent-color: var(--primary); width: 16px; height: 16px; }
+
+/* ── Meta card ── */
+.qb-meta-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.qb-meta-row { display: flex; gap: 12px; }
+@media (max-width: 480px) { .qb-meta-row { flex-direction: column; } }
+
+/* ── Generic form pieces ── */
+.qb-field  { display: flex; flex-direction: column; gap: 6px; }
+.qb-label  { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; }
+.qb-hint-text { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+.qb-input {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  color: var(--text);
+  font-size: 13.5px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .18s, box-shadow .18s;
+}
+.qb-input:focus  { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(88,204,2,.12); }
+.qb-input-lg     { font-size: 15px; font-weight: 600; padding: 12px 14px; }
+
+.qb-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  color: var(--text);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+  line-height: 1.6;
+}
+.qb-textarea:focus { border-color: var(--primary); }
+
+/* ── Question type grid ── */
+.qb-type-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 4px;
+}
+@media (max-width: 480px) { .qb-type-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.qb-type-btn {
+  padding: 8px 6px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .15s;
+  text-align: center;
+  font-family: inherit;
+}
+.qb-type-btn:hover  { border-color: var(--primary); color: var(--primary); background: rgba(88,204,2,.06); }
+.qb-type-btn.active { border-color: var(--primary); color: var(--primary); background: rgba(88,204,2,.1); font-weight: 600; }
+
+/* ── Question editor panel ── */
+.qb-editor-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--primary);
+  border-radius: var(--radius-sm);
+  padding: 18px 16px;
+  margin: 14px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.qb-editor-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+.qb-editor-panel-title { font-size: 14px; font-weight: 700; color: var(--text); }
+
+.qb-editor-panel-footer {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Option rows (MC) ── */
+.qb-option-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.qb-option-row input[type="radio"] { flex-shrink: 0; accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; }
+.qb-option-letter  { width: 20px; flex-shrink: 0; font-weight: 700; color: var(--text-muted); font-size: 12px; }
+.qb-option-row .qb-input { flex: 1; }
+
+/* ── Answer rows (Write) ── */
+.qb-answer-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.qb-answer-row .qb-input { flex: 1; }
+
+/* ── Pair rows (Matching) ── */
+.qb-pair-row  { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.qb-pair-row .qb-input { flex: 1; }
+.qb-arrow     { color: var(--text-muted); font-size: 16px; flex-shrink: 0; }
+
+/* ── Sub-question blocks (Reading) ── */
+.qb-subq-block {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 12px;
+  margin-bottom: 10px;
+}
+.qb-subq-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.qb-subq-block .qb-input { margin-bottom: 6px; }
+
+/* ── Questions list rows ── */
+.qb-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.qb-section-title { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .8px; }
+
+.qb-question-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  transition: border-color .15s;
+}
+.qb-question-row:hover { border-color: var(--primary); }
+.qb-question-row.active { border-color: var(--primary); background: rgba(88,204,2,.04); }
+.qb-question-row-left {
+  display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0;
+}
+.qb-q-num          { font-size: 11px; font-weight: 700; color: var(--text-muted); width: 18px; text-align: center; flex-shrink: 0; }
+.qb-q-type-badge   { font-size: 16px; flex-shrink: 0; }
+.qb-q-preview      { font-size: 13px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.qb-question-row-actions { display: flex; gap: 4px; flex-shrink: 0; }
+
+.qb-no-questions {
+  text-align: center; padding: 24px;
+  color: var(--text-muted); font-size: 13px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-xs);
+}
+
+/* ── Play section ── */
+.qb-play-section {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Buttons ── */
+.qb-btn {
+  padding: 8px 16px;
+  border-radius: var(--radius-xs);
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.qb-btn:hover        { opacity: .88; transform: translateY(-1px); }
+.qb-btn:active       { transform: scale(.97); }
+.qb-btn:disabled     { opacity: .5; cursor: not-allowed; transform: none; }
+.qb-btn-primary      { background: var(--primary); color: #fff; }
+.qb-btn-secondary    { background: var(--secondary); color: #fff; }
+.qb-btn-danger       { background: var(--danger); color: #fff; }
+.qb-btn-ghost        { background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-secondary); }
+.qb-btn-ghost:hover  { border-color: var(--primary); color: var(--primary); opacity: 1; }
+.qb-btn-sm           { padding: 5px 11px; font-size: 12px; }
+.qb-btn-play {
+  background: var(--gradient, linear-gradient(135deg,var(--primary),#7cdf37));
+  color: white;
+  padding: 13px 32px;
+  font-size: 15px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 18px rgba(88,204,2,.3);
+}
+
+.qb-icon-btn {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .14s;
+  flex-shrink: 0;
+}
+.qb-icon-btn:hover        { border-color: var(--primary); color: var(--primary); background: rgba(88,204,2,.06); }
+.qb-icon-btn.qb-icon-danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(255,75,75,.08); }

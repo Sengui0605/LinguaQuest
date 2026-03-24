@@ -10,6 +10,7 @@ const Achievements = {
         try {
             const res = await fetch('data/achievements.json');
             this.definitions = await res.json();
+            console.log(`🏆 Achievements Loaded: ${this.definitions.length} definitions found`);
         } catch (e) {
             console.error('Error loading achievements:', e);
         }

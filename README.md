@@ -1,4 +1,4 @@
-# LinguaQuest 🌍
+# LinguaQuest 🌎
 
 LinguaQuest es una plataforma educativa completa, de código abierto, para aprender inglés. Inspirado en Duolingo y construido completamente desde cero usando Vanilla JavaScript, HTML5 y CSS3, permitiendo un rendimiento ultrarrápido sin dependencias pesadas de frameworks.
 

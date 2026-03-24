@@ -23,7 +23,7 @@ function createWindow() {
         title: 'LinguaQuest'
     });
 
-    mainWindow.loadFile(path.join(__dirname, '..', 'index.html'));
+    mainWindow.loadFile(path.join(__dirname, '..', 'public', 'app.html'));
 
     if (process.argv.includes('--dev')) {
         mainWindow.webContents.openDevTools();
