@@ -584,6 +584,31 @@ body::before {
   font-size: 16px;
 }
 
+@media (max-width: 480px) {
+  .home-header {
+    padding: 12px 14px !important;
+  }
+  .logo-text-sm {
+    font-size: 18px !important;
+  }
+  .logo-icon-sm {
+    font-size: 20px !important;
+  }
+  .home-stats-bar {
+    gap: 4px !important;
+  }
+  .stat-badge {
+    padding: 4px 6px !important;
+    font-size: 11px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo-text-sm {
+    display: none !important;
+  }
+}
+
 .home-menu {
   display: flex;
   flex-direction: column;
