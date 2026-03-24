@@ -2,7 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="LinguaQuest"/>
 <title>LinguaQuest — Aprende Inglés Jugando</title>
 <meta name="description" content="La plataforma educativa que convierte el aprendizaje de inglés en una aventura. Quizzes, logros, niveles y herramientas para profesores."/>
 <link rel="icon" href="favicon.ico"/>
@@ -70,7 +74,7 @@ nav.scrolled{background:rgba(8,12,10,0.9);backdrop-filter:blur(20px);border-bott
 }
 .nav-cta:hover{background:var(--green-l);transform:translateY(-1px);box-shadow:0 4px 24px rgba(88,204,2,.45)}
 @media(max-width:768px){
-  nav{padding:14px 20px}
+  nav{padding:14px 20px; flex-wrap: wrap; gap: 10px; justify-content: center;}
   .nav-links{display:none}
 }
 
