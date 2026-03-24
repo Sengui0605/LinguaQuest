@@ -28,6 +28,7 @@ const ASSETS = [
   '/assets/sounds/levelup.mp3',
   '/assets/sounds/perfect.mp3',
   '/assets/icons/icon.svg',
+  '/assets/icons/icon-512.png',
   '/manifest.json',
 ];
 
