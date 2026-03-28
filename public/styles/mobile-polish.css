@@ -671,6 +671,10 @@
     max-width: calc(100vw - 32px) !important;
     border-radius: 12px !important;
     padding: 10px 16px !important;
+    transform: translateX(-50%) translateY(200px) !important; /* Forces it completely off-screen */
+  }
+  .toast.show {
+    transform: translateX(-50%) translateY(0) !important;
   }
   .toast-text {
     font-size: 13px !important;
