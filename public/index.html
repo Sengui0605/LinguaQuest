@@ -712,11 +712,167 @@ footer{
 
 /* ─── MOBILE ─────────────────────────────────────── */
 @media(max-width:600px){
-  section{padding:72px 20px}
-  .hero-float{height:220px}
-  .fc-quiz{width:260px}
+  section{padding:60px 16px}
+
+  /* Nav */
+  nav{padding:12px 16px}
+  .nav-cta{padding:7px 16px;font-size:13px}
+
+  /* Hero */
+  #hero{padding:80px 16px 40px;min-height:auto}
+  .hero-badge{font-size:12px;padding:5px 12px}
+  h1{font-size:clamp(32px,9vw,52px)}
+  .hero-sub{font-size:15px;max-width:100%}
+  .hero-ctas{flex-direction:column;align-items:stretch;gap:10px}
+  .btn-primary,.btn-secondary{
+    padding:14px 24px;font-size:15px;
+    text-align:center;justify-content:center;
+    width:100%;
+  }
+  .hero-float{height:200px;margin-top:12px}
+  .fc-quiz{width:240px;padding:12px 14px}
+  .fc-quiz-q{font-size:12px;margin-bottom:8px}
+  .fc-opt{padding:7px 10px;font-size:12px}
+  .fc-letter{width:20px;height:20px;font-size:10px}
   .fc-xp,.fc-streak{display:none}
-  .fc-ach{width:220px}
+  .fc-ach{width:200px;padding:10px 14px}
+  .fc-ach-icon{font-size:22px}
+  .fc-ach-title{font-size:11px}
+  .fc-ach-sub{font-size:10px}
+  .fc-ach-new{font-size:8px}
+
+  /* Stats */
+  #stats{padding:40px 16px}
+  .stat-num{font-size:36px}
+  .stat-lbl{font-size:12px}
+  .stat-item{padding:20px 10px}
+
+  /* How it works */
+  .how-inner{gap:32px}
+  .section-title{font-size:clamp(26px,6vw,40px)}
+  .section-sub{font-size:15px}
+  .how-step{padding:16px 0;gap:14px}
+  .step-num{width:36px;height:36px;font-size:14px;border-radius:10px}
+  .step-title{font-size:15px}
+  .step-desc{font-size:13px}
+  .how-visual{min-height:300px}
+  .how-screen{max-width:280px}
+  .how-screen-body{padding:16px}
+  .map-node-p{width:44px;height:44px;font-size:18px}
+  .map-path{height:18px}
+  .fp-timer{width:32px;height:32px;font-size:12px;margin-bottom:10px}
+  .fp-q{font-size:12px;margin-bottom:10px}
+  .fp-opt{padding:7px 10px;font-size:11px;gap:6px}
+  .fp-letter{width:18px;height:18px;font-size:9px}
+  .rp-icon{font-size:36px}
+  .rp-title{font-size:15px}
+  .rp-sub{font-size:11px}
+  .rp-stats{gap:6px}
+  .rp-stat{padding:8px 4px}
+  .rp-stat-n{font-size:15px}
+  .rp-stat-l{font-size:9px}
+  .rp-bar-lbl{font-size:10px}
+  .tp-code{font-size:20px;letter-spacing:4px}
+  .tp-label{font-size:9px}
+  .tp-row{padding:6px 8px;gap:8px}
+  .tp-name{font-size:11px}
+  .tp-xp{font-size:10px}
+  .tp-bar-sm{width:40px}
+
+  /* Features */
+  .features-header{margin-bottom:40px}
+  .feat-card{padding:20px;border-radius:16px}
+  .feat-icon{width:40px;height:40px;border-radius:12px;font-size:18px;margin-bottom:14px}
+  .feat-title{font-size:16px}
+  .feat-desc{font-size:13px}
+
+  /* Quiz types */
+  .types-header{margin-bottom:36px}
+  .types-tabs{gap:6px;margin-bottom:28px}
+  .type-tab{padding:7px 14px;font-size:12px}
+  .type-panel.active{grid-template-columns:1fr;gap:24px}
+  .type-icon-big{font-size:40px;margin-bottom:12px}
+  .type-info .type-title{font-size:22px}
+  .type-info .type-desc{font-size:14px}
+  .type-tags{gap:6px}
+  .type-tag{font-size:11px;padding:3px 10px}
+  .type-demo{padding:18px;border-radius:16px}
+  .td-label{font-size:10px;margin-bottom:8px}
+  .td-question{font-size:13px;margin-bottom:12px}
+  .td-opt{padding:8px 10px;font-size:12px;gap:7px}
+  .td-letter{width:22px;height:22px;font-size:10px}
+  .td-write-input{padding:10px 12px;font-size:14px}
+  .td-write-hint{font-size:10px}
+  .td-token{padding:6px 10px;font-size:12px}
+  .td-match-item{padding:8px 10px;font-size:12px}
+  .td-puzzle-token{padding:6px 10px;font-size:12px}
+  .td-reading-passage{font-size:11px;padding:10px}
+
+  /* Teachers */
+  .teachers-inner{gap:32px}
+  .tf-item{gap:10px}
+  .tf-check{width:24px;height:24px;font-size:11px;border-radius:6px}
+  .tf-title{font-size:13px}
+  .tf-desc{font-size:12px}
+  .teachers-visual{padding:20px;border-radius:16px}
+  .tv-title{font-size:14px}
+  .tv-badge{font-size:10px;padding:2px 7px}
+  .tv-stats{gap:6px;margin-bottom:14px}
+  .tv-stat{padding:8px 4px;border-radius:8px}
+  .tv-stat-n{font-size:18px}
+  .tv-stat-l{font-size:9px}
+  .tv-student-row{padding:8px 10px;gap:8px;border-radius:8px}
+  .tv-s-avatar{font-size:16px}
+  .tv-s-name{font-size:12px}
+  .tv-s-progress{width:60px}
+  .tv-s-xp{font-size:11px}
+
+  /* CTA */
+  #cta{padding:80px 16px}
+  .cta-title{font-size:clamp(28px,7vw,44px)}
+  .cta-sub{font-size:15px;margin-bottom:28px}
+  .cta-btns{flex-direction:column;align-items:stretch}
+  .cta-btns .btn-primary{width:100%;justify-content:center;text-align:center}
+  .cta-note{font-size:11px}
+
+  /* Footer */
+  footer{padding:32px 16px 24px}
+  .footer-inner{flex-direction:column;align-items:center;text-align:center;gap:12px}
+  .footer-links{gap:16px;flex-wrap:wrap;justify-content:center}
+  .footer-links a{font-size:12px}
+  .footer-copy{font-size:11px}
+}
+
+/* ── EXTRA SMALL (320-360px) ── */
+@media(max-width:380px){
+  h1{font-size:28px}
+  .hero-badge{font-size:11px;padding:4px 10px}
+  .hero-sub{font-size:14px}
+  .btn-primary,.btn-secondary{padding:12px 20px;font-size:14px}
+  .hero-float{height:180px}
+  .fc-quiz{width:220px;padding:10px 12px}
+  .fc-quiz-q{font-size:11px}
+  .fc-ach{width:180px}
+  .stat-num{font-size:30px}
+  .section-title{font-size:24px}
+  .type-tab{font-size:11px;padding:6px 10px}
+  .feat-card{padding:16px}
+}
+
+/* ── PREVENT HORIZONTAL SCROLL ── */
+html,body{overflow-x:hidden;max-width:100vw}
+
+/* ── SMOOTH TOUCH INTERACTIONS ── */
+.btn-primary:active,.btn-secondary:active,
+.type-tab:active,.feat-card:active,
+.how-step:active,.td-opt:active{
+  transform:scale(0.97)!important;
+  transition:transform 0.1s;
+}
+
+/* ── DISABLE PARALLAX ON MOBILE (touch = no mousemove) ── */
+@media(pointer:coarse){
+  .hero-grid{transform:none!important}
 }
 </style>
 </head>

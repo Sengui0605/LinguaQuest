@@ -1,0 +1,1135 @@
+/* ============================================================
+   LinguaQuest — Mobile Polish & Visual Bug Fixes
+   Final comprehensive pass for beautiful mobile experience
+   ============================================================ */
+
+/* ── GLOBAL MOBILE RESETS ── */
+@media (max-width: 480px) {
+
+  /* ── FIX: Screen content consistent padding ── */
+  .screen-content,
+  .home-content,
+  .activation-content,
+  .quiz-content,
+  .results-content {
+    padding: 16px 12px 80px !important;
+    max-width: 100% !important;
+  }
+
+  /* ── FIX: Welcome title too large on small screens ── */
+  .welcome-title {
+    font-size: 22px !important;
+    line-height: 1.3;
+  }
+  .welcome-subtitle {
+    font-size: 14px !important;
+  }
+  .welcome-section {
+    padding: 20px 0 14px !important;
+  }
+
+  /* ── FIX: Menu buttons need tighter spacing on mobile ── */
+  .home-menu {
+    gap: 8px !important;
+  }
+  .menu-btn {
+    padding: 13px 14px !important;
+    gap: 10px !important;
+    border-radius: 16px !important;
+  }
+  .menu-btn-icon {
+    font-size: 24px !important;
+    width: 34px !important;
+  }
+  .btn-title {
+    font-size: 15px !important;
+  }
+  .btn-desc {
+    font-size: 12px !important;
+  }
+  .menu-btn-arrow {
+    font-size: 16px !important;
+  }
+
+  /* ── FIX: Profile stats grid overflow ── */
+  .profile-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .profile-stat-card {
+    padding: 12px 8px !important;
+  }
+  .stat-value {
+    font-size: 20px !important;
+  }
+  .stat-label {
+    font-size: 11px !important;
+  }
+  .stat-card-icon {
+    font-size: 12px !important;
+    top: 6px !important;
+    right: 6px !important;
+  }
+  .avatar-circle {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 40px !important;
+  }
+  #profile-name {
+    font-size: 20px !important;
+  }
+  .profile-card {
+    padding: 20px 0 !important;
+  }
+
+  /* ── FIX: XP bar section ── */
+  .profile-xp-section {
+    padding: 12px !important;
+    margin-bottom: 14px !important;
+  }
+  .xp-header {
+    font-size: 13px !important;
+  }
+
+  /* ── FIX: Level cards ── */
+  .level-card {
+    padding: 18px 14px !important;
+  }
+  .level-icon {
+    font-size: 32px !important;
+    width: 46px !important;
+    height: 46px !important;
+  }
+  .level-name {
+    font-size: 17px !important;
+  }
+  .level-description {
+    font-size: 12px !important;
+  }
+  .level-header {
+    gap: 12px !important;
+  }
+
+  /* ── FIX: Course cards tight on mobile ── */
+  .course-card {
+    padding: 14px 12px !important;
+    gap: 10px !important;
+    border-radius: 14px !important;
+  }
+  .course-icon {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 22px !important;
+    border-radius: 10px !important;
+  }
+  .course-name {
+    font-size: 14px !important;
+  }
+  .course-desc {
+    font-size: 11px !important;
+  }
+  .course-meta {
+    font-size: 10px !important;
+    gap: 8px !important;
+  }
+
+  /* ── FIX: Quiz stats bar overflow ── */
+  .quiz-stats-top {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    padding: 10px 12px !important;
+    margin-bottom: 16px !important;
+    justify-content: center !important;
+  }
+  .quiz-score,
+  .quiz-streak,
+  .quiz-xp {
+    font-size: 13px !important;
+  }
+  #quiz-question-number {
+    font-size: 12px !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* ── FIX: Timer too big on mobile ── */
+  .timer-circle {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  .timer-text {
+    font-size: 18px !important;
+  }
+  .timer-container {
+    margin-bottom: 14px !important;
+  }
+
+  /* ── FIX: Question text ── */
+  .question-text {
+    font-size: 17px !important;
+    line-height: 1.4 !important;
+  }
+  .question-category {
+    font-size: 11px !important;
+    padding: 3px 10px !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* ── FIX: Quiz options overflow ── */
+  .quiz-options {
+    gap: 10px !important;
+  }
+  .option-btn {
+    padding: 14px 12px !important;
+    font-size: 14px !important;
+    gap: 10px !important;
+    border-radius: 14px !important;
+    border-width: 1.5px !important;
+  }
+  .option-letter {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 12px !important;
+  }
+
+  /* ── FIX: Write input on mobile ── */
+  #quiz-write-input {
+    font-size: 16px !important;
+    padding: 14px 12px !important;
+  }
+  .quiz-submit-btn {
+    padding: 14px !important;
+    font-size: 15px !important;
+  }
+
+  /* ── FIX: Order tokens overflow ── */
+  .order-token {
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+  }
+  .order-slots {
+    min-height: 48px !important;
+    padding: 8px !important;
+    gap: 6px !important;
+  }
+  .order-tokens {
+    gap: 6px !important;
+  }
+
+  /* ── FIX: Matching question 2-column too tight ── */
+  .quiz-matching-container {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    max-width: 100% !important;
+  }
+  .matching-item {
+    padding: 12px 10px !important;
+    font-size: 14px !important;
+  }
+  /* Add a visual separator between columns when stacked */
+  .matching-column:first-child {
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  /* ── FIX: Reading comprehension passage ── */
+  .quiz-reading-passage {
+    font-size: 13px !important;
+    padding: 12px !important;
+    line-height: 1.6 !important;
+  }
+  .quiz-reading-question-text {
+    font-size: 14px !important;
+  }
+  .quiz-reading-options {
+    gap: 8px !important;
+  }
+
+  /* ── FIX: Sentence puzzle ── */
+  .quiz-puzzle-instruction {
+    font-size: 14px !important;
+  }
+  .quiz-puzzle-tokens-label,
+  .quiz-puzzle-answer-label {
+    font-size: 12px !important;
+  }
+  .quiz-puzzle-answer {
+    min-height: 48px !important;
+    padding: 8px !important;
+  }
+
+  /* ── FIX: Quiz feedback panel ── */
+  .quiz-feedback {
+    padding: 28px 20px !important;
+    border-width: 2px !important;
+    border-radius: 16px !important;
+  }
+  .feedback-icon {
+    font-size: 30px !important;
+  }
+  .feedback-text {
+    font-size: 16px !important;
+  }
+  .feedback-explanation {
+    font-size: 13px !important;
+  }
+  .feedback-next-btn {
+    padding: 12px 24px !important;
+    font-size: 14px !important;
+    width: 100% !important;
+  }
+
+  /* ── FIX: Results screen ── */
+  .results-header .results-icon,
+  #results-main-icon {
+    font-size: 48px !important;
+  }
+  #results-title {
+    font-size: 20px !important;
+  }
+  #results-subtitle,
+  .results-subtitle {
+    font-size: 13px !important;
+  }
+  .results-stats {
+    gap: 6px !important;
+  }
+  .result-stat {
+    padding: 10px 6px !important;
+    border-radius: 10px !important;
+  }
+  .result-stat-value {
+    font-size: 16px !important;
+  }
+  .result-stat-label {
+    font-size: 10px !important;
+  }
+  .results-buttons,
+  .results-actions {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .results-btn {
+    max-width: 100% !important;
+    width: 100% !important;
+    min-width: unset !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    border-radius: 12px !important;
+  }
+  .score-circle {
+    width: 110px !important;
+    height: 110px !important;
+  }
+  .score-percent {
+    font-size: 26px !important;
+  }
+
+  /* ── FIX: Results chart bars ── */
+  .results-type-label {
+    width: 80px !important;
+    font-size: 11px !important;
+  }
+  .results-bar-pct {
+    width: 30px !important;
+    font-size: 10px !important;
+  }
+  .results-type-bar {
+    gap: 6px !important;
+  }
+
+  /* ── FIX: Results failed section ── */
+  .results-failed-toggle {
+    font-size: 12px !important;
+    padding: 8px 12px !important;
+  }
+  .results-failed-item {
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+  }
+  .results-failed-q {
+    font-size: 12px !important;
+  }
+
+  /* ── FIX: Achievements ── */
+  .achievements-summary {
+    font-size: 14px !important;
+  }
+  .achievement-card {
+    padding: 14px 12px !important;
+    gap: 10px !important;
+    border-radius: 14px !important;
+  }
+  .achievement-icon-large {
+    font-size: 28px !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 10px !important;
+  }
+  .achievement-name {
+    font-size: 14px !important;
+  }
+  .achievement-desc {
+    font-size: 12px !important;
+  }
+
+  /* ── FIX: Instruction cards ── */
+  .instruction-card {
+    padding: 14px !important;
+    border-radius: 14px !important;
+  }
+  .instruction-icon {
+    font-size: 26px !important;
+  }
+  .instruction-card h3 {
+    font-size: 15px !important;
+  }
+  .instruction-card p {
+    font-size: 13px !important;
+  }
+
+  /* ── FIX: Settings screen ── */
+  .setting-item {
+    padding: 12px 14px !important;
+    border-radius: 10px !important;
+  }
+  .setting-item label {
+    font-size: 13px !important;
+    margin-bottom: 6px !important;
+  }
+  .settings-group h3 {
+    font-size: 12px !important;
+  }
+  .toggle-switch {
+    width: 44px !important;
+    height: 26px !important;
+  }
+  .toggle-slider:before {
+    height: 20px !important;
+    width: 20px !important;
+  }
+  .toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(18px) !important;
+  }
+  .avatar-option {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 20px !important;
+  }
+  .settings-save-btn,
+  .settings-danger-btn {
+    padding: 12px !important;
+    font-size: 14px !important;
+    border-radius: 12px !important;
+  }
+  .status-badge {
+    font-size: 13px !important;
+  }
+  .key-display {
+    font-size: 12px !important;
+  }
+
+  /* ── FIX: Role selection ── */
+  .role-card {
+    padding: 18px 16px !important;
+    border-radius: 16px !important;
+    max-width: 100% !important;
+  }
+  .role-icon {
+    font-size: 28px !important;
+  }
+  .role-name {
+    font-size: 16px !important;
+  }
+  .role-desc {
+    font-size: 12px !important;
+  }
+  .role-cards-container {
+    gap: 12px !important;
+    margin: 20px 0 !important;
+  }
+
+  /* ── FIX: Activation screens ── */
+  .activation-content {
+    padding: 20px 16px !important;
+  }
+  .activation-card {
+    padding: 20px 16px !important;
+    border-radius: 16px !important;
+  }
+  .activation-card p {
+    font-size: 13px !important;
+  }
+  .activation-btn {
+    padding: 12px !important;
+    font-size: 15px !important;
+    border-radius: 12px !important;
+  }
+  #teacher-key-input,
+  #student-code-input {
+    font-size: 16px !important;
+    padding: 12px 14px !important;
+  }
+  .activation-logo h2 {
+    font-size: 20px !important;
+  }
+  .logo-badge {
+    font-size: 10px !important;
+    padding: 3px 8px !important;
+  }
+  .back-btn-float {
+    width: 38px !important;
+    height: 38px !important;
+    top: 14px !important;
+    left: 14px !important;
+    font-size: 16px !important;
+  }
+  .activation-footer {
+    font-size: 11px !important;
+    margin-top: 20px !important;
+  }
+  .whatsapp-contact {
+    font-size: 13px !important;
+    padding: 6px 14px !important;
+  }
+
+  /* ── FIX: Teacher dashboard ── */
+  .teacher-tabs {
+    gap: 4px !important;
+    padding: 3px !important;
+    border-radius: 10px !important;
+  }
+  .teacher-tab {
+    padding: 7px 10px !important;
+    font-size: 11px !important;
+    border-radius: 8px !important;
+    min-width: unset !important;
+  }
+  .teacher-code-box {
+    padding: 14px 12px !important;
+  }
+  .big-code:not(.is-placeholder) {
+    font-size: 24px !important;
+    letter-spacing: 6px !important;
+    padding: 12px !important;
+    max-width: 100% !important;
+  }
+  .teacher-student-row {
+    grid-template-columns: 1fr auto !important;
+    gap: 6px !important;
+    padding: 10px !important;
+    font-size: 12px !important;
+  }
+  .teacher-stat-value {
+    font-size: 22px !important;
+  }
+  .teacher-stat-label {
+    font-size: 10px !important;
+  }
+  #teacher-overview-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .teacher-stat-card {
+    padding: 10px 8px !important;
+  }
+
+  /* ── FIX: Quiz builder on mobile ── */
+  .qb-editor-topbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+  .qb-editor-topbar > div {
+    flex-direction: column !important;
+    gap: 6px !important;
+  }
+  .qb-list-header {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    text-align: center !important;
+  }
+  .qb-meta-card {
+    padding: 12px !important;
+  }
+  .qb-type-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 4px !important;
+  }
+  .qb-type-btn {
+    font-size: 11px !important;
+    padding: 6px 4px !important;
+  }
+  .qb-editor-panel {
+    padding: 14px 12px !important;
+  }
+  .qb-editor-panel-footer {
+    flex-direction: column !important;
+  }
+  .qb-editor-panel-footer .qb-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .qb-question-row {
+    gap: 6px !important;
+    padding: 8px 10px !important;
+  }
+  .qb-q-preview {
+    font-size: 12px !important;
+    max-width: calc(100vw - 160px) !important;
+  }
+  .qb-quiz-card {
+    padding: 12px !important;
+  }
+  .qb-quiz-title {
+    font-size: 14px !important;
+  }
+  .qb-btn-play {
+    padding: 12px 24px !important;
+    font-size: 14px !important;
+    width: 100% !important;
+  }
+  .qb-option-row,
+  .qb-pair-row,
+  .qb-answer-row {
+    flex-wrap: wrap !important;
+  }
+
+  /* ── FIX: Adventure map nodes on mobile ── */
+  .map-node {
+    width: 58px !important;
+    height: 58px !important;
+  }
+  .map-node-icon {
+    font-size: 22px !important;
+  }
+  .map-node-label {
+    font-size: 9px !important;
+    max-width: 75px !important;
+  }
+  .map-row {
+    height: 100px !important;
+  }
+
+  /* ── FIX: Modals on mobile ── */
+  .modal-content {
+    width: 92% !important;
+    max-width: 340px !important;
+    padding: 22px 18px !important;
+    border-radius: 16px !important;
+  }
+  .modal-content h3 {
+    font-size: 18px !important;
+  }
+  .modal-content p {
+    font-size: 13px !important;
+  }
+  .modal-btn {
+    padding: 11px !important;
+    font-size: 13px !important;
+  }
+
+  /* ── FIX: Name entry modal ── */
+  .name-modal-content {
+    padding: 24px 18px !important;
+  }
+  .name-modal-icon {
+    font-size: 44px !important;
+  }
+  .name-modal-content h2 {
+    font-size: 20px !important;
+  }
+  .name-input {
+    font-size: 15px !important;
+    padding: 12px !important;
+  }
+  .name-confirm-btn {
+    padding: 12px !important;
+    font-size: 15px !important;
+  }
+
+  /* ── FIX: Level up modal ── */
+  .levelup-content {
+    padding: 30px 20px !important;
+  }
+  .levelup-icon {
+    font-size: 60px !important;
+  }
+  .levelup-content h2 {
+    font-size: 22px !important;
+  }
+  .levelup-level {
+    font-size: 38px !important;
+  }
+  .levelup-btn {
+    padding: 12px 32px !important;
+    font-size: 15px !important;
+  }
+
+  /* ── FIX: Toast positioning (above dark mode toggle) ── */
+  .toast {
+    bottom: 70px !important;
+    max-width: calc(100vw - 32px) !important;
+    border-radius: 12px !important;
+    padding: 10px 16px !important;
+  }
+  .toast-text {
+    font-size: 13px !important;
+  }
+
+  /* ── FIX: Theory section ── */
+  .theory-back-to-list {
+    font-size: 13px !important;
+  }
+  .theory-article {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* ── FIX: Student quizzes screen ── */
+  #student-quizzes-screen .screen-content p {
+    font-size: 12px !important;
+  }
+
+  /* ── FIX: Loading screen ── */
+  .logo-icon {
+    font-size: 60px !important;
+  }
+  .logo-text {
+    font-size: 34px !important;
+    letter-spacing: -1.5px !important;
+  }
+  .loading-bar-container {
+    width: 200px !important;
+  }
+  .loading-text {
+    font-size: 13px !important;
+  }
+
+  /* ── FIX: Quiz header ── */
+  .quiz-header {
+    padding: 14px 14px !important;
+    gap: 12px !important;
+  }
+  .quiz-exit-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 16px !important;
+  }
+
+  /* ── FIX: Screen headers ── */
+  .screen-header {
+    padding: 14px 14px !important;
+  }
+  .screen-header h2 {
+    font-size: 16px !important;
+  }
+  .back-btn {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 16px !important;
+  }
+  .header-spacer {
+    width: 34px !important;
+  }
+
+  /* ── FIX: Combo banner on mobile ── */
+  .combo-banner {
+    font-size: 22px !important;
+    padding: 12px 24px !important;
+  }
+
+  /* ── FIX: XP float ── */
+  .xp-float {
+    font-size: 16px !important;
+  }
+
+  /* ── FIX: Mini achievements in profile ── */
+  .mini-achievement {
+    padding: 10px !important;
+    gap: 10px !important;
+  }
+  .mini-achievement-icon {
+    font-size: 20px !important;
+    width: 30px !important;
+  }
+  .mini-achievement-name {
+    font-size: 13px !important;
+  }
+  .mini-achievement-desc {
+    font-size: 11px !important;
+  }
+
+  /* ── FIX: Compare section in results ── */
+  .results-previous-compare {
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+    gap: 6px !important;
+  }
+}
+
+/* ── EXTRA SMALL (320-360px) – e.g. iPhone SE, Galaxy S Mini ── */
+@media (max-width: 360px) {
+  .welcome-title {
+    font-size: 19px !important;
+  }
+  .menu-btn-icon {
+    font-size: 20px !important;
+    width: 28px !important;
+  }
+  .btn-title {
+    font-size: 14px !important;
+  }
+  .menu-btn {
+    padding: 12px 10px !important;
+  }
+  .profile-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .stat-value {
+    font-size: 18px !important;
+  }
+  .option-btn {
+    padding: 12px 10px !important;
+    font-size: 13px !important;
+  }
+  .question-text {
+    font-size: 15px !important;
+  }
+  .level-card {
+    padding: 14px 10px !important;
+  }
+  .level-name {
+    font-size: 15px !important;
+  }
+  .level-icon {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 26px !important;
+  }
+  .big-code:not(.is-placeholder) {
+    font-size: 20px !important;
+    letter-spacing: 4px !important;
+  }
+  .teacher-tab {
+    font-size: 10px !important;
+    padding: 6px 8px !important;
+  }
+  .quiz-stats-top {
+    padding: 8px 10px !important;
+  }
+  .quiz-score,
+  .quiz-streak,
+  .quiz-xp {
+    font-size: 12px !important;
+  }
+  .logo-text {
+    font-size: 28px !important;
+  }
+}
+
+/* ── VISUAL POLISH: Smooth border-radius consistency ── */
+@media (max-width: 480px) {
+  .level-card,
+  .course-card,
+  .menu-btn,
+  .option-btn,
+  .quiz-feedback,
+  .achievement-card,
+  .instruction-card,
+  .activation-card,
+  .role-card,
+  .results-btn {
+    border-radius: 14px !important;
+  }
+}
+
+/* ── VISUAL POLISH: Smooth transitions everywhere ── */
+.menu-btn,
+.level-card,
+.course-card,
+.option-btn,
+.role-card,
+.achievement-card,
+.profile-stat-card,
+.teacher-tab,
+.qb-type-btn,
+.results-btn {
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+/* ── VISUAL POLISH: Active states for mobile touch ── */
+@media (max-width: 768px) {
+  .menu-btn:active,
+  .option-btn:active,
+  .role-card:active,
+  .course-card:active,
+  .level-card:active {
+    transform: scale(0.97) !important;
+    opacity: 0.9;
+  }
+  .results-btn:active,
+  .activation-btn:active,
+  .quiz-submit-btn:active,
+  .feedback-next-btn:active {
+    transform: scale(0.96) !important;
+  }
+}
+
+/* ── VISUAL POLISH: Prevent horizontal scroll globally ── */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw;
+}
+
+/* ── VISUAL POLISH: Safe area insets for notched phones ── */
+@supports (padding: env(safe-area-inset-top)) {
+  .home-header,
+  .screen-header,
+  .quiz-header {
+    padding-top: max(14px, env(safe-area-inset-top)) !important;
+  }
+  .toast {
+    bottom: max(70px, calc(env(safe-area-inset-bottom) + 60px)) !important;
+  }
+  .theme-toggle-btn {
+    bottom: max(14px, calc(env(safe-area-inset-bottom) + 8px)) !important;
+  }
+}
+
+/* ── FIX: Prevent text selection on interactive elements ── */
+.menu-btn,
+.option-btn,
+.order-token,
+.matching-item,
+.role-card,
+.level-card,
+.course-card,
+.teacher-tab,
+.qb-type-btn {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── FIX: Input zoom prevention on iOS (all inputs must be ≥16px) ── */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="password"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* ── VISUAL POLISH: Smoother scroll on mobile ── */
+.screen {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* ── VISUAL POLISH: Loading screen mobile adjustments ── */
+@media (max-width: 480px) {
+  #loading-screen .loading-content {
+    transform: scale(0.9);
+  }
+}
+
+/* ── Results chart section mobile ── */
+@media (max-width: 480px) {
+  .results-chart-section {
+    margin: 12px 0 !important;
+  }
+  .results-chart-title {
+    font-size: 12px !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+/* ── VISUAL POLISH: Matching items stacked label ── */
+@media (max-width: 480px) {
+  .matching-column::before {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 4px;
+    display: block;
+  }
+  .matching-column:first-child::before {
+    content: "Selecciona";
+  }
+  .matching-column:last-child::before {
+    content: "Conecta con";
+  }
+}
+
+/* ── THEORY SECTION MOBILE FIXES ── */
+@media (max-width: 480px) {
+  .theory-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding: 16px 8px 60px !important;
+  }
+  .theory-card {
+    padding: 14px 10px !important;
+    border-radius: 12px !important;
+    gap: 6px !important;
+  }
+  .theory-card-icon {
+    font-size: 26px !important;
+    margin-bottom: 2px !important;
+  }
+  .theory-card-title {
+    font-size: 13px !important;
+    line-height: 1.3;
+  }
+  .theory-card-tag {
+    font-size: 9px !important;
+    padding: 2px 6px !important;
+  }
+  .theory-content-view {
+    padding: 0 8px 40px !important;
+  }
+  .theory-back-to-list {
+    font-size: 14px !important;
+    padding: 10px 0 !important;
+  }
+  .theory-article {
+    padding: 18px 14px !important;
+    border-radius: 16px !important;
+    font-size: 14px !important;
+  }
+  .theory-article h3 {
+    font-size: 17px !important;
+    margin: 18px 0 10px !important;
+    padding-left: 12px !important;
+  }
+  .theory-article p {
+    font-size: 14px !important;
+    margin-bottom: 12px !important;
+  }
+  .theory-article ul {
+    margin-left: 16px !important;
+  }
+  .theory-article li {
+    font-size: 13px !important;
+    margin-bottom: 6px !important;
+  }
+  .example-box {
+    padding: 12px !important;
+    border-radius: 10px !important;
+    margin: 10px 0 !important;
+  }
+  .example-item {
+    font-size: 13px !important;
+  }
+  .example-translation {
+    font-size: 12px !important;
+  }
+  .tip-box, .tip-box-premium {
+    padding: 14px !important;
+    border-radius: 12px !important;
+    gap: 10px !important;
+    margin: 14px 0 !important;
+  }
+  .tip-icon {
+    font-size: 20px !important;
+  }
+  .tip-text {
+    font-size: 13px !important;
+  }
+  .reading-box {
+    padding: 16px 14px !important;
+    border-radius: 12px !important;
+    margin: 14px 0 !important;
+  }
+}
+
+/* ── EXTRA SMALL THEORY ── */
+@media (max-width: 360px) {
+  .theory-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .theory-card {
+    padding: 12px 8px !important;
+  }
+  .theory-card-title {
+    font-size: 12px !important;
+  }
+  .theory-article {
+    padding: 14px 10px !important;
+  }
+}
+
+/* ── STUDENT QUIZZES LIST MOBILE ── */
+@media (max-width: 480px) {
+  #student-quizzes-list .qb-quiz-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+  #student-quizzes-list .qb-quiz-card-actions {
+    width: 100% !important;
+    justify-content: flex-end !important;
+  }
+}
+
+/* ── FIX: Horizontal overflow prevention on all screens ── */
+.screen {
+  overflow-x: hidden !important;
+}
+
+/* ── FIX: Quiz content vertical centering when few options ── */
+@media (max-width: 480px) {
+  .quiz-content {
+    justify-content: flex-start !important;
+    padding-top: 10px !important;
+  }
+}
+
+/* ── VISUAL POLISH: Subtle glow on active quiz option selection ── */
+@media (max-width: 480px) {
+  .option-btn.correct {
+    box-shadow: 0 0 20px rgba(88, 204, 2, 0.2) !important;
+  }
+  .option-btn.incorrect {
+    box-shadow: 0 0 20px rgba(255, 75, 75, 0.2) !important;
+  }
+}
+
+/* ── FIX: Ensure PWA status bar area doesn't overlap ── */
+@media (display-mode: standalone) {
+  .home-header,
+  .screen-header,
+  .quiz-header {
+    padding-top: max(16px, env(safe-area-inset-top)) !important;
+  }
+}
+
+/* ── FIX: Activation inputs consistent styling ── */
+@media (max-width: 480px) {
+  #activation-key-input,
+  #teacher-key-input,
+  #student-code-input {
+    width: 100% !important;
+    background: var(--bg-elevated) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 12px !important;
+    padding: 14px 16px !important;
+    color: var(--text) !important;
+    font-size: 16px !important;
+    text-align: center !important;
+    letter-spacing: 2px !important;
+  }
+  #activation-key-input:focus,
+  #teacher-key-input:focus,
+  #student-code-input:focus {
+    border-color: var(--purple) !important;
+    box-shadow: 0 0 12px rgba(206, 130, 255, 0.15) !important;
+    outline: none !important;
+  }
+}
