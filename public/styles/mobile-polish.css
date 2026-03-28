@@ -672,9 +672,13 @@
     border-radius: 12px !important;
     padding: 10px 16px !important;
     transform: translateX(-50%) translateY(200px) !important; /* Forces it completely off-screen */
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
   .toast.show {
     transform: translateX(-50%) translateY(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
   .toast-text {
     font-size: 13px !important;

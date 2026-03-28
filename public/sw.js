@@ -1,5 +1,5 @@
-/* LinguaQuest Service Worker v1.1 */
-const CACHE = 'lq-v1.1';
+/* LinguaQuest Service Worker v1.2 */
+const CACHE = 'lq-v1.2';
 const ASSETS = [
   '/',
   '/index.html',
