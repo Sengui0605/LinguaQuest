@@ -1,11 +1,13 @@
-/* LinguaQuest Service Worker v1.0 */
-const CACHE = 'lq-v1';
+/* LinguaQuest Service Worker v1.1 */
+const CACHE = 'lq-v1.1';
 const ASSETS = [
   '/',
   '/index.html',
   '/app.html',
   '/styles/style.css',
   '/styles/theory.css',
+  '/styles/style-additions.css',
+  '/styles/mobile-polish.css',
   '/js/app.js',
   '/js/quizEngine.js',
   '/js/questions.js',
